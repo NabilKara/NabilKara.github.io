@@ -1,28 +1,79 @@
-baseURL = "https://NabilKara.github.io/"
+baseURL = "https://nabilkara.github.io/"
 languageCode = "en-us"
-title = "Nabil Kara's CTF Writeups"
-theme = "PaperMod"
+title = "Nabil Kara — CTF Writeups"
+theme = "poison"
+pluralizelisttitles = false
+
+[pagination]
+  pagerSize = 10
 
 [params]
-  author = "Nabil Kara"
-  ShowBreadCrumbs = true
-  ShowReadingTime = true
-  ShowCodeCopyButtons = true
-  defaultTheme = "auto"
+  brand = "Nabil Kara"                        
+  brand_image = "/images/logo.png"        
+  description = """CTF writeups, cryptography , OSINT
+  and Web exploitation"""              # <<< A short site description
+  dark_mode = true
 
-[params.homeInfoParams]
-  Title = "CTF Writeups"
-  Content = "Writeups and notes from my hacking journey."
+  front_page_content = ["posts"]
 
-[menu]
-  [[menu.main]]
-    identifier = "archive"
-    name = "Archive"
-    url = "/archives/"
-    weight = 10
+  # Sidebar navigation menu
+  menu = [
+    { Name = "Posts", URL = "/posts/", Pre = "📝", HasChildren = true, Limit = 5 },
+    { Name = "SmileyCTF2025", URL = "/posts/smileyCTF2025", Pre = "🎯", HasChildren = false }
+  ]
 
-  [[menu.main]]
-    identifier = "tags"
-    name = "Tags"
-    url = "/tags/"
-    weight = 20
+  # Social links
+  github_url = "https://github.com/NabilKara"
+  discord_url = "https://discord.com/users/1023863221549006938"
+  email_url = "mailto:karanabil420@gmail.com"
+  linkedin_url = "https://www.linkedin.com/in/nabil-kara-42b1211aa/"
+  x_url = "https://x.com/NabilKara12312"
+
+  rss_icon = true
+  rss_section = "posts"
+
+  moon_sun_background_color = "#515151"
+  moon_sun_color = "#FFF"
+  sidebar_a_color = "#FFF"
+  sidebar_bg_color = "#202020"
+  sidebar_h1_color = "#FFF"
+  sidebar_img_border_color = "#515151"
+  sidebar_p_color = "#909090"
+  sidebar_socials_color = "#FFF"
+
+  code_color = "#000"
+  code_background_color = "#E5E5E5"
+  code_block_color = "#FFF"
+  code_block_background_color = "#272822"
+  content_bg_color = "#FAF9F6"
+  date_color = "#515151"
+  link_color = "#268BD2"
+  list_color = "#5A5A5A"
+  post_title_color = "#303030"
+  table_border_color = "#E5E5E5"
+  table_stripe_color = "#F9F9F9"
+  text_color = "#222"
+
+  code_color_dark = "#FFF"
+  code_background_color_dark = "#515151"
+  code_block_color_dark = "#FFF"
+  code_block_background_color_dark = "#272822"
+  content_bg_color_dark = "#121212"
+  date_color_dark = "#9A9A9A"
+  link_color_dark = "#268BD2"
+  list_color_dark = "#9D9D9D"
+  post_title_color_dark = "#DBE2E9"
+  table_border_color_dark = "#515151"
+  table_stripe_color_dark = "#202020"
+  text_color_dark = "#EEE"
+
+[taxonomies]
+  series = "series"
+  tags = "tags"
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    weight = 1
+    [languages.en.params]
+      Author = { name = "Nabil Kara" }
