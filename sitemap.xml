@@ -2,17 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://nabilkara.github.io/posts/my-first-post/</loc>
+    <loc>https://NabilKara.github.io/</loc>
     <lastmod>2025-07-08T16:38:32+02:00</lastmod>
   </url><url>
-    <loc>https://nabilkara.github.io/</loc>
+    <loc>https://NabilKara.github.io/posts/</loc>
     <lastmod>2025-07-08T16:38:32+02:00</lastmod>
   </url><url>
-    <loc>https://nabilkara.github.io/posts/</loc>
-    <lastmod>2025-07-08T16:38:32+02:00</lastmod>
+    <loc>https://NabilKara.github.io/categories/</loc>
   </url><url>
-    <loc>https://nabilkara.github.io/categories/</loc>
-  </url><url>
-    <loc>https://nabilkara.github.io/tags/</loc>
+    <loc>https://NabilKara.github.io/tags/</loc>
   </url>
 </urlset>
