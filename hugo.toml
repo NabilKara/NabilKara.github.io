@@ -1,0 +1,28 @@
+baseURL = "https://NabilKara.github.io/"
+languageCode = "en-us"
+title = "Nabil Kara's CTF Writeups"
+theme = "PaperMod"
+
+[params]
+  author = "Nabil Kara"
+  ShowBreadCrumbs = true
+  ShowReadingTime = true
+  ShowCodeCopyButtons = true
+  defaultTheme = "auto"
+
+[params.homeInfoParams]
+  Title = "CTF Writeups"
+  Content = "Writeups and notes from my hacking journey."
+
+[menu]
+  [[menu.main]]
+    identifier = "archive"
+    name = "Archive"
+    url = "/archives/"
+    weight = 10
+
+  [[menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    url = "/tags/"
+    weight = 20
