@@ -10,8 +10,8 @@ pluralizelisttitles = false
 [params]
   brand = "Nabil Kara"                        
   brand_image = "/images/logo.png"        
-  description = """CTF writeups, cryptography , OSINT
-  and Web exploitation"""              # <<< A short site description
+  description = """Hi I'm Nabil a cyber security student at USTHB , Algeria ,  and a CTF player at TroJeun , with strong intrest in cryptography , OSINT
+  and Web exploitation"""              
   dark_mode = true
 
   front_page_content = ["posts"]
