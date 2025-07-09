@@ -77,3 +77,6 @@ pluralizelisttitles = false
     weight = 1
     [languages.en.params]
       Author = { name = "Nabil Kara" }
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
