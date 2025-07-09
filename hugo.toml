@@ -18,9 +18,9 @@ pluralizelisttitles = false
 
   # Sidebar navigation menu
   menu = [
-    { Name = "Posts", URL = "/posts/", Pre = "📝", HasChildren = true, Limit = 5 },
-    { Name = "SmileyCTF2025", URL = "/posts/smileyCTF2025", Pre = "🎯", HasChildren = false }
+  { Name = "Posts", URL = "/posts/", HasChildren = true, Limit = 5 },
   ]
+
 
   # Social links
   github_url = "https://github.com/NabilKara"
