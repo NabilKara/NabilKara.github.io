@@ -1,5 +1,5 @@
 ---
-title: "SSSS"
+title: "SSSS sekaiCTF 2025"
 date: 2025-08-18
 draft: false
 tags: ["cryptography", "sekaictf2025"]
@@ -162,3 +162,7 @@ for secret in set(set1) & set(set2):
 ```
 
 Flag : `SEKAI{https://youtu.be/XGxIE1hr0w4}`
+
+## References
+[Wikipedia Article](https://en.wikipedia.org/wiki/Shamir%27s_secret_sharing)
+[GeeksForGeeks Article](https://www.geeksforgeeks.org/computer-networks/shamirs-secret-sharing-algorithm-cryptography/)
