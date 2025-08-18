@@ -5,12 +5,12 @@ draft: false
 tags: ["cryptography", "sekaictf2025"]
 ---
 
-### Challenge Description 
+## Challenge Description 
     Shamir SendS the Secret to everyone
     Author : Utaha
     Points : 100 pts
 
-### Source code 
+## Source code 
 ```python
 import random, os
 
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     challenge(secret)
 ```
 
-### How Shamir's secret sharing scheme (SSS) works ?
+## How Shamir's secret sharing scheme (SSS) works ?
 
 - Let's say S is the secret that we wish to share.
 
@@ -88,26 +88,26 @@ if __name__ == "__main__":
 
 - If we know K or more parts from S1, S2, S3, ...., Sn, then we can reconstructe our secret S easily. This is conventionally called (K, N) threshold scheme.
 
-### Solution 
+## Solution 
 
-#### Challenge description
+### Challenge description
 For a polynomial of degree `d` we need `d+1` points in order to reconstruct the polynomial and retrieve the secret
 
 Here in the challenge the server generates two random polynomials over $\mathbb{F}_p$ with p = $2^{256}$ - 189 , but in each polynomial , one randomly chosen coefficient is set to the same secret , so this isn't standart , as in the standard shamir's secret sharing scheme the secret is the free coefficient.
 
 The secret is the unique intersection of the coefficient sets of both polynomials.
 
-#### The problem
+### The problem
 
 Normally , reconstructing a polynomial of degree `d` needs `d+1` queries. Here d is at most 50 , so 51 queries in that case for example  would be needed but we are allowed to only d queries.
 
-#### The exploit
+### The exploit
 
 If we observe that `(p-1) mod 29 = 0` , we deduce that there exists an element `g` of order 29 in $\mathbb{F}_p^*$. In this case , $x^{t}$ = $x^{29}$ = 1 , so the constent term overlaps with the  `t`-th term
 
 Using Sage’s `lagrange_polynomial` over the subgroup points, we recover the coefficients of this polynomial.
 
-#### Solver
+### Solver
 ```python
 from os import environ
 environ['TERM'] = 'xterm'
