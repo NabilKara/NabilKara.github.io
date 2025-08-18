@@ -5,7 +5,7 @@ draft: false
 tags: ["cryptography", "rsa", "coppersmith"]
 ---
 ## Intro 
-This is a challenge from ASCIS CTF 2022 I upsolved using [cuso](https://github.com/kionactf/coppersmith) when I was learning the coppersmith method.
+This is a challenge from ASCIS CTF 2022 I upsolved using [cuso](https://github.com/keeganryan/cuso) when I was learning the coppersmith method.
 
 ## Source code
 ```python
