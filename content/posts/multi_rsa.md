@@ -62,59 +62,59 @@ N = p^r \cdot q, \quad r \in [5,30]
 $$
  
 
-instead of the usual \( N = p \cdot q \).
+instead of the usual $ N = p \cdot q $ 
 
 As a result : 
 
-\[
+$$
 \varphi(N) = p^{r-1}(p-1)(q-1).
-\]
+$$
 
 ---
 
-### Step 1 – What are \(e_1\) and \(e_2\)?
-The code generates two huge random numbers \(d_1, d_2\) and computes:
+### Step 1 – What are $e_1$ and $e_2$?
+The code generates two huge random numbers $d_1, d_2$ and computes:
 
-\[
+$$
 e_1 = d_1^{-1} \pmod{\varphi(N)}, \quad e_2 = d_2^{-1} \pmod{\varphi(N)}.
-\]
+$$
 
 So :
-\[
+$$
 e_1 d_1 \equiv 1 \pmod{\varphi(N)}, \quad e_2 d_2 \equiv 1 \pmod{\varphi(N)}.
-\]
+$$
 
 ---
 
-### Step 2 – Relation between \(e_1, e_2\) and \(\varphi(N)\)
+### Step 2 – Relation between $e_1, e_2$ and $\varphi(N)$
 
-We have  that :   \( e_1 d_1 - k_1 \varphi(N) = 1 \) and \( e_2 d_2 - k_2 \varphi(N) = 1 \) with \( e_1 > e_2 \).  
-Hence \( e_1 d_1 \equiv 1 \pmod{\varphi(N)} \) and \( e_2 d_2 \equiv 1 \pmod{\varphi(N)} \).  
+We have  that :   $ e_1 d_1 - k_1 \varphi(N) = 1 $ and $ e_2 d_2 - k_2 \varphi(N) = 1 $ with $ e_1 > e_2 $.  
+Hence $ e_1 d_1 \equiv 1 \pmod{\varphi(N)} $ and $ e_2 d_2 \equiv 1 \pmod{\varphi(N)} $.  
 
-Multiplying the first equation by \( e_2 \) and the second by \( e_1 \) and subtracting, we get  
+Multiplying the first equation by $ e_2 $ and the second by $ e_1 $ and subtracting, we get  
 
-\[
+$$
 e_1 e_2 (d_1 - d_2) \equiv e_2 - e_1 \pmod{\varphi(N)}.
-\]
+$$
 
-Since \(\varphi(N) = p^{r-1}(p-1)(q-1)\), we get  
+Since $\varphi(N) = p^{r-1}(p-1)(q-1)$, we get :   
 
-\[
+$$
 e_1 e_2 (d_1 - d_2) \equiv e_2 - e_1 \pmod{p^{r-1}}.
-\]
+$$
 
 Now, we have the modular linear equation :
 $$
 e_1 e_2 x - (e_2 - e_1) \equiv 0 \pmod{p^{r-1}}
 $$
 
-That is if \( \lvert d_{1} - d_{2} \rvert < \frac{N^{r(r-1)}}{(r+1)^{2}} \)   computing :  
+That is if $ \lvert d_{1} - d_{2} \rvert < \frac{N^{r(r-1)}}{(r+1)^{2}} $   computing :  
 $$
 \gcd(e_{1}e_{2}x - (e_{2} - e_{1}), N) 
 = \gcd\!\big(p^{r-1}(p-1)(q-1)y, \; p^{r}q\big) = g,
 $$
 
-will lead to determining \( p \), hence factoring \( N \) as follows:  
+will lead to determining $ p $, hence factoring $ N $ as follows:  
 
 $$
 p = g^{\tfrac{1}{r-1}} \quad \text{when } g = p^{r-1},
@@ -137,58 +137,59 @@ $$
 ### Step 3 – Using Coppersmith’s method
 We set up the polynomial:
 
-\[
+$$
 f(x) = e_1 e_2 \cdot x - (e_1 - e_2)
-\]
+$$
 
-over \(\mathbb{Z}_N\).
+over $\mathbb{Z}_N$.
 
-By applying **Coppersmith’s small root attack**, we can recover the small solution \(x\).  
+By applying **Coppersmith’s small root attack**, we can recover the small solution $x$.  
+we chose `beta = 0.2` since `r` is at least equal to `5`
 
 ---
 
-### Step 4 – Extracting \(p\)
+### Step 4 – Extracting $p$
 From the relation, we compute:
 
-\[
+$$
 g = \gcd(e_1 e_2 \cdot x - (e_1 - e_2), N).
-\]
+$$
 
 This gcd leaks either:
 
-- \(p^{r-1}\),  
-- \(p^r\), or  
-- \(p^{r-1} \cdot q\).
+- $p^{r-1}$,  
+- $p^r$, or  
+- $p^{r-1} \cdot q$.
 
-So we try possible values of \(r\) (between 5 and 30 as given) and test if \(g\) is a perfect \((r-1)\)-th or \(r\)-th power.  
-This gives us the correct \(p\).
+So we try possible values of $r$ (between 5 and 30 as given) and test if $g$ is a perfect $(r-1)$-th or $r$-th power.  
+This gives us the correct $p$.
 
 ---
 
-### Step 5 – Recovering \(q\) and the private key
-Once \(p\) and \(r\) are known:
+### Step 5 – Recovering $q$ and the private key
+Once $p$ and $r$ are known:
 
-\[
+$$
 q = \frac{N}{p^r}
-\]
+$$
 
 and then
 
-\[
+$$
 \varphi(N) = p^{r-1}(p-1)(q-1).
-\]
+$$
 
 Finally, compute:
 
-\[
+$$
 d = e^{-1} \pmod{\varphi(N)}.
-\]
+$$
 
 Now decryption is straightforward:
 
-\[
+$$
 m = c^d \bmod N.
-\]
+$$
 
 ---
 
@@ -265,5 +266,5 @@ else :
 
 ## References : 
 
-- [New attacks on RSA with moduli \( N = p^{r} q \)](https://eprint.iacr.org/2015/399.pdf)
+- [New attacks on RSA with moduli $ N = p^{r} q $](https://eprint.iacr.org/2015/399.pdf)
 - [Sagemath Docs](https://doc.sagemath.org/html/en/reference/polynomial_rings/sage/rings/polynomial/polynomial_modn_dense_ntl.html#sage.rings.polynomial.polynomial_modn_dense_ntl.small_roots)
