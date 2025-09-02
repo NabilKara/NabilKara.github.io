@@ -6,7 +6,7 @@ tags: ["cryptography", "rsa", "coppersmith"]
 ---
 
 ## Challenge Description
-![Challenge Description](/static/images/Multi_パワー-RSA.png)
+## ![Challenge Description](/static/images/mutli_rsa.png)
 
 ## Source code 
 #### Chall
