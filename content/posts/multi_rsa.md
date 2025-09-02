@@ -57,9 +57,10 @@ e2 = 850398480980401986298102282279813335475715445567833370977916007225344001326
 
 The challenge implements a variant of **RSA**, where the modulus is of the form
 
-\[
+$$
 N = p^r \cdot q, \quad r \in [5,30]
-\]
+$$
+ 
 
 instead of the usual \( N = p \cdot q \).
 

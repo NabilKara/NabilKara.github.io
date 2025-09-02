@@ -80,3 +80,9 @@ pluralizelisttitles = false
 [caches]
   [caches.images]
     dir = ':cacheDir/images'
+
+[markup.goldmark.extensions.passthrough]
+    enable = true
+[markup.goldmark.extensions.passthrough.delimiters]
+    block = [['\[', '\]'], ['$$', '$$']]
+    inline = [['\(', '\)']]
