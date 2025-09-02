@@ -203,7 +203,7 @@ Decrypting yields the plaintext, and we recognize the flag format:
 
 
 
-### Solver script : 
+### 2- Solver script : 
 ```python
 from Crypto.Util.number import long_to_bytes
 
@@ -267,9 +267,9 @@ else :
     print("failed")
 ```
 
-### flag :  ``fwectf{9PWRr_R54_90w3r3d_Bu7_N07_53cur3}``
+### 3- flag :  ``fwectf{9PWRr_R54_90w3r3d_Bu7_N07_53cur3}``
 
-## References : 
+## 4- References : 
 
 - [New attacks on RSA with moduli $ N = p^{r} q $](https://eprint.iacr.org/2015/399.pdf)
 - [Sagemath Docs](https://doc.sagemath.org/html/en/reference/polynomial_rings/sage/rings/polynomial/polynomial_modn_dense_ntl.html#sage.rings.polynomial.polynomial_modn_dense_ntl.small_roots)
