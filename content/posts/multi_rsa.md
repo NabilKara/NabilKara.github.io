@@ -166,7 +166,7 @@ $$p^{r-1}$$
  or  
 $$p^r$$
 or  
-$$p^{r-1} \cdot q$$.
+$$p^{r-1} \cdot q$$
 
 So we try possible values of $r$ (between 5 and 30 as given) and test if $g$ is a perfect $(r-1)$-th or $r$-th power.  
 This gives us the correct $p$.
