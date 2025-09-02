@@ -80,12 +80,3 @@ pluralizelisttitles = false
 [caches]
   [caches.images]
     dir = ':cacheDir/images'
-
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.extensions]
-      passthrough = true
-    [markup.goldmark.parser]
-      [markup.goldmark.parser.attribute]
-        block = true
-        title = true
