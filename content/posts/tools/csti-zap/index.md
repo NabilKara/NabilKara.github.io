@@ -1,3 +1,10 @@
+---
+title: "A ZAP CSTI active scan rule"
+date: 2026-06-09
+draft: false
+tags: ["ZAP", "JAVA", "CSTI"]
+---
+
 ## Introduction
 
 I started to work on this project as an intern at Djezzy Optimum Télécom Algérie SPA , under the supervision of Mr. [Beraoud Abdelkhalek](https://www.linkedin.com/in/abdelkhalek-beraoud-707567245/) who was behind the idea and  whose invaluable guidance, transformative advice, and remarkable patience supported the work throughout its development.
