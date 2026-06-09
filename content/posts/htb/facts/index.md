@@ -82,11 +82,9 @@ We noticed in the `sudo -l` that the "Environment Reset option" `env_reset` is s
 
 ![](pasted-image-20260602234058.png)
 
-Et voilà! we come to the end of this machine . Thanks to the author for fun machine.
+Et voilà! we come to the end of this machine . Thanks to the author for the fun machine.
 
 **Note :**
-
-  
 
 We could've used the **CVE-2026-1776**'s PoC that represents a bypass of the incomplete fix for **CVE-2024-46987**
 
