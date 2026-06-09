@@ -21,6 +21,24 @@ pluralizelisttitles = false
   { Name = "Posts", URL = "/posts/", HasChildren = true, Limit = 5 },
   ]
 
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 10
+
+  [[menu.main]]
+    parent = "Posts"
+    name = "HTB"
+    url = "/posts/htb/"
+    weight = 1
+
+  [[menu.main]]
+    parent = "Posts"
+    name = "CTF"
+    url = "/posts/ctf/"
+    weight = 2
+
 
   # Social links
   github_url = "https://github.com/NabilKara"
