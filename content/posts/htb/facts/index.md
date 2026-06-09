@@ -12,6 +12,7 @@ tags: ["CMS", "linux", "privelege escalation"]
 
 - Author: LazyTitan333
   
+![](solved.png)
 
 An initial nmap scan reveals two open ports : `80` (HTTP) and `23` (SSH)
 
