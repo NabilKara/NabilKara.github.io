@@ -39,6 +39,12 @@ pluralizelisttitles = false
     url = "/posts/ctf/"
     weight = 2
 
+  [[menu.main]]
+    parent = "Posts"
+    name = "Tools"
+    url = "/posts/tools/"
+    weight = 3
+
 
   # Social links
   github_url = "https://github.com/NabilKara"
