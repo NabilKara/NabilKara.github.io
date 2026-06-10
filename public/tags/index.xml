@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Tags on Nabil Kara — CTF Writeups</title>
-		<link>http://localhost:4000/tags/</link>
+		<link>http://localhost:1313/tags/</link>
 		<description>Recent content in Tags on Nabil Kara — CTF Writeups</description>
 		<generator>Hugo</generator>
 		<language>en-us</language>
@@ -10,77 +10,77 @@
 		
 		
 		
-			<lastBuildDate>Tue, 09 Jun 2026 00:00:00 +0000</lastBuildDate>
+			<lastBuildDate>Wed, 03 Jun 2026 00:00:00 +0000</lastBuildDate>
 		
-			<atom:link href="http://localhost:4000/tags/index.xml" rel="self" type="application/rss+xml" />
-			<item>
-				<title>Csti</title>
-				<link>http://localhost:4000/tags/csti/</link>
-				<pubDate>Tue, 09 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:4000/tags/csti/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Rules</title>
-				<link>http://localhost:4000/tags/rules/</link>
-				<pubDate>Tue, 09 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:4000/tags/rules/</guid>
-				<description></description>
-			</item>
-			<item>
-				<title>Zaproxy</title>
-				<link>http://localhost:4000/tags/zaproxy/</link>
-				<pubDate>Tue, 09 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:4000/tags/zaproxy/</guid>
-				<description></description>
-			</item>
+			<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>CMS</title>
-				<link>http://localhost:4000/tags/cms/</link>
+				<link>http://localhost:1313/tags/cms/</link>
 				<pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:4000/tags/cms/</guid>
+				<guid>http://localhost:1313/tags/cms/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Linux</title>
-				<link>http://localhost:4000/tags/linux/</link>
+				<link>http://localhost:1313/tags/linux/</link>
 				<pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:4000/tags/linux/</guid>
+				<guid>http://localhost:1313/tags/linux/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Privelege Escalation</title>
-				<link>http://localhost:4000/tags/privelege-escalation/</link>
+				<link>http://localhost:1313/tags/privelege-escalation/</link>
 				<pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:4000/tags/privelege-escalation/</guid>
+				<guid>http://localhost:1313/tags/privelege-escalation/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Coppersmith</title>
-				<link>http://localhost:4000/tags/coppersmith/</link>
+				<link>http://localhost:1313/tags/coppersmith/</link>
 				<pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
-				<guid>http://localhost:4000/tags/coppersmith/</guid>
+				<guid>http://localhost:1313/tags/coppersmith/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Cryptography</title>
-				<link>http://localhost:4000/tags/cryptography/</link>
+				<link>http://localhost:1313/tags/cryptography/</link>
 				<pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
-				<guid>http://localhost:4000/tags/cryptography/</guid>
+				<guid>http://localhost:1313/tags/cryptography/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Rsa</title>
-				<link>http://localhost:4000/tags/rsa/</link>
+				<link>http://localhost:1313/tags/rsa/</link>
 				<pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
-				<guid>http://localhost:4000/tags/rsa/</guid>
+				<guid>http://localhost:1313/tags/rsa/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Sekaictf2025</title>
-				<link>http://localhost:4000/tags/sekaictf2025/</link>
+				<link>http://localhost:1313/tags/sekaictf2025/</link>
 				<pubDate>Mon, 18 Aug 2025 00:00:00 +0000</pubDate>
-				<guid>http://localhost:4000/tags/sekaictf2025/</guid>
+				<guid>http://localhost:1313/tags/sekaictf2025/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>CSTI</title>
+				<link>http://localhost:1313/tags/csti/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/csti/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>JAVA</title>
+				<link>http://localhost:1313/tags/java/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/java/</guid>
+				<description></description>
+			</item>
+			<item>
+				<title>ZAP</title>
+				<link>http://localhost:1313/tags/zap/</link>
+				<pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/tags/zap/</guid>
 				<description></description>
 			</item>
 	</channel>

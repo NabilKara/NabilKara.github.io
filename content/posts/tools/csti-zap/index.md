@@ -13,7 +13,7 @@ The active scan rule described here was built as an alpha rule for ZAP. You find
 
 ## Implementation basis : The CSTI-Alert paper
 
-The methodology comes from the [paper](https://www.eurecom.fr/en/publication/8608) : `{{alert('CSTI')}}: Large-Scale Detection of Client-Side Template Injection`. The part we are concerned with  for this active scna rule  is not the large-scale crawling infrastructure itself, but the detection methodology:
+The methodology comes from the [paper](https://www.eurecom.fr/en/publication/8608) : `{{alert('CSTI')}}: Large-Scale Detection of Client-Side Template Injection`. The part we are concerned with  for this active scan rule  is not the large-scale crawling infrastructure itself, but the detection methodology:
 
 1. Open the target in a real browser.
 2. Detect whether a known client-side template engine is present through various methods as discussed later.
@@ -58,7 +58,7 @@ The scan has six practical phases.
 The first step is to use the `Client Spider` add-on to extract `input` , `textarea` components 
 and query strings .
 
-Following up some tests I made and some discussions with the ZAP maintainers ( which were very helpful and nice ) I've concluded that the Client Spider has some gaps around textareas and submission nodes and doesn't report them. Therefore , my implementation supplements spider data by parsing the original HTML response for `textarea` tags. 
+Following up some tests and discussions I made with the ZAP maintainers ( which were very helpful and nice btw ) I've concluded that the Client Spider has some gaps around textareas and submission nodes and doesn't report them. Therefore , my implementation supplements spider data by parsing the original HTML response for `textarea` tags. 
 
 Engine detection loads the  page in the shared Selenium browser and delegates to `ClientSideEngineDetector.detect(driver, url)`. The detector first checks for known global objects, then searches for active render or compile calls, script template blocks, and template-specific DOM attributes.
 
@@ -109,7 +109,7 @@ static String replaceParameterValue(String targetUrl, String paramName, String p
 
 DOM input probing loads the page, locates candidate inputs by ID or name, injects the payload, dispatches `input`, `change`, `keyup`, and `blur`, fills other form fields with safe dummy values, and attempts same-origin form submission when there is no file input. 
 
-A form may have multiple vulnerable fields , thus , when dealing with math-capable engines like `Angular` and `vue` , we send unique incremental payloads , so that vulnerable fields can be distinguished and reported appropriately . Non-math engines are probed one field at a time because `[object Object]` is not unique.
+A form may have multiple vulnerable fields , thus , when dealing with math-capable engines like `Angular` and `vue` , we send unique incremental payloads , therefore ,  vulnerable fields can be distinguished and reported appropriately. Non-math engines are probed one field at a time because `[object Object]` is not unique.
 
 Alerting raises informational alerts for engine detection and payload probing, then raises a high-risk CSTI alert only when the expected result appears.
 
@@ -366,4 +366,4 @@ The engine detection alert reports the detected engine, the matched global objec
 The reflection results show the payload probing phase, where the rule compares the baseline page with the attacked page and reports a match only when the expected evaluated result appears.
 
 ## Conclusion 
-This has been a brief walkthrough of the work I've done so far, looking forward for the review ZAP maintainer's review so it can eventually be integrated into the ZAP codebase.
+This has been a brief walkthrough of the work I've done so far, looking forward for the review ZAP maintainer's so it can eventually be integrated into the ZAP codebase.

@@ -11,5 +11,6 @@ Browse my writeups by category:
 
 - [HTB writeups](/posts/htb/)
 - [CTF writeups](/posts/ctf/)
+- [Tools](/posts/tools/)
 
 Recent posts from each category appear on their section pages linked above.

@@ -1,74 +1,67 @@
-
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:4000/tags/csti/</loc>
+    <loc>http://localhost:1313/posts/ctf/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/posts/tools/csti-zap/</loc>
+    <loc>http://localhost:1313/posts/htb/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/posts/ctf/</loc>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/posts/htb/</loc>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/</loc>
+    <loc>http://localhost:1313/posts/tools/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/posts/</loc>
-    <lastmod>2026-06-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:4000/tags/rules/</loc>
-    <lastmod>2026-06-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:4000/tags/</loc>
-    <lastmod>2026-06-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:4000/posts/tools/</loc>
-    <lastmod>2026-06-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:4000/tags/zaproxy/</loc>
-    <lastmod>2026-06-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:4000/tags/cms/</loc>
+    <loc>http://localhost:1313/tags/cms/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/posts/htb/facts/</loc>
+    <loc>http://localhost:1313/posts/htb/facts/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/tags/linux/</loc>
+    <loc>http://localhost:1313/tags/linux/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/tags/privelege-escalation/</loc>
+    <loc>http://localhost:1313/tags/privelege-escalation/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/tags/coppersmith/</loc>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2026-06-03T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/coppersmith/</loc>
     <lastmod>2025-09-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/tags/cryptography/</loc>
+    <loc>http://localhost:1313/tags/cryptography/</loc>
     <lastmod>2025-09-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/posts/ctf/multi_rsa/</loc>
+    <loc>http://localhost:1313/posts/ctf/multi_rsa/</loc>
     <lastmod>2025-09-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/tags/rsa/</loc>
+    <loc>http://localhost:1313/tags/rsa/</loc>
     <lastmod>2025-09-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/posts/ctf/leaky_rsa/</loc>
+    <loc>http://localhost:1313/posts/ctf/leaky_rsa/</loc>
     <lastmod>2025-08-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/tags/sekaictf2025/</loc>
+    <loc>http://localhost:1313/tags/sekaictf2025/</loc>
     <lastmod>2025-08-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/posts/ctf/ssss/</loc>
+    <loc>http://localhost:1313/posts/ctf/ssss/</loc>
     <lastmod>2025-08-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/about/</loc>
+    <loc>http://localhost:1313/about/</loc>
     <lastmod>2025-07-08T17:27:40+02:00</lastmod>
   </url><url>
-    <loc>http://localhost:4000/series/</loc>
+    <loc>http://localhost:1313/tags/csti/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/java/</loc>
+  </url><url>
+    <loc>http://localhost:1313/series/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/zap/</loc>
   </url>
 </urlset>

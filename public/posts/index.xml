@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Posts on Nabil Kara — CTF Writeups</title>
-		<link>http://localhost:4000/posts/</link>
+		<link>http://localhost:1313/posts/</link>
 		<description>Recent content in Posts on Nabil Kara — CTF Writeups</description>
 		<generator>Hugo</generator>
 		<language>en-us</language>
@@ -10,8 +10,15 @@
 		
 		
 		
-			<lastBuildDate></lastBuildDate>
+			<lastBuildDate>Tue, 09 Jun 2026 00:00:00 +0000</lastBuildDate>
 		
-			<atom:link href="http://localhost:4000/posts/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+			<item>
+				<title>Tools</title>
+				<link>http://localhost:1313/posts/tools/</link>
+				<pubDate>Tue, 09 Jun 2026 00:00:00 +0000</pubDate>
+				<guid>http://localhost:1313/posts/tools/</guid>
+				<description>&lt;p&gt;This section contains my tools, rules and integrations.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/posts/tools/csti-zap/&#34;&gt;CSTI ZAP Active Scan Rule&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+			</item>
 	</channel>
 </rss>
