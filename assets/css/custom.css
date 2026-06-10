@@ -1,6 +1,12 @@
 /* Home page */
+.home-reader.container.content {
+  max-width: none;
+  margin-right: 0;
+  padding-right: 3rem;
+}
+
 .home-layout {
-  max-width: 54rem;
+  max-width: 78rem;
 }
 
 .home-hero {
