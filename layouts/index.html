@@ -59,7 +59,6 @@
     <section class="home-section">
         <div class="home-section-heading">
             <h2>Latest Posts</h2>
-            <p>Recent notes from all categories.</p>
         </div>
         <ul class="home-latest-list">
             {{ range first 6 (where .Site.RegularPages "Type" "posts") }}

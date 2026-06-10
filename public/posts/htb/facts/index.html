@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+<script defer language="javascript" type="text/javascript" src="/js/bundle.min.974997d6c1088f354720cdb5b43ef6a48213ea419fe2553c4edfdf118893e6f6.js"></script>
+
+
+
+
+
+
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    <link rel="icon" href=/favicon.png>
+
+    
+    
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+
+
+<!-- Open Graph image and Twitter Card metadata -->
+
+<title itemprop="name">Nabil Kara - Facts - Hack The Box machine</title>
+<meta property="og:title" content=Nabil&#32;Kara&#32;-&#32;Facts&#32;-&#32;Hack&#32;The&#32;Box&#32;machine />
+<meta name="twitter:title" content=Nabil&#32;Kara&#32;-&#32;Facts&#32;-&#32;Hack&#32;The&#32;Box&#32;machine />
+<meta itemprop="name" content=Nabil&#32;Kara&#32;-&#32;Facts&#32;-&#32;Hack&#32;The&#32;Box&#32;machine />
+<meta name="application-name" content=Nabil&#32;Kara&#32;-&#32;Facts&#32;-&#32;Hack&#32;The&#32;Box&#32;machine />
+<meta property="og:site_name" content="Nabil Kara — CTF Writeups" />
+
+
+<meta name="description" content="" />
+<meta itemprop="description" content="" />
+<meta property="og:description" content="" />
+<meta name="twitter:description" content="" />
+
+
+<base href="http://localhost:1313/posts/htb/facts/" />
+<link rel="canonical" href="http://localhost:1313/posts/htb/facts/" itemprop="url" />
+<meta name="url" content="http://localhost:1313/posts/htb/facts/" />
+<meta name="twitter:url" content="http://localhost:1313/posts/htb/facts/" />
+<meta property="og:url" content="http://localhost:1313/posts/htb/facts/" />
+
+
+<meta property="og:updated_time" content="2026-06-03T00:00:00Z" />
+
+
+<link rel="sitemap" type="application/xml" title="Sitemap" href='http://localhost:1313/sitemap.xml' />
+
+<meta name="robots" content="index,follow" />
+<meta name="googlebot" content="index,follow" />
+
+
+
+  
+    <meta name="twitter:site" content="@NabilKara12312" />
+    <meta name="twitter:creator" content="@NabilKara12312" />
+
+<meta property="fb:admins" content="" />
+
+
+<meta name="apple-mobile-web-app-title" content="Nabil Kara — CTF Writeups" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.163.0">
+
+
+    
+    
+
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.20df1a47a62670991e21d194f61c843c27664d145e016ff10b45793759fdd24f.css">
+
+
+    
+    <style>
+    body {
+        --sidebar-bg-color: #202020;
+        --sidebar-img-border-color: #515151;
+        --sidebar-p-color: #909090;
+        --sidebar-h1-color: #FFF;
+        --sidebar-a-color: #FFF;
+        --sidebar-socials-color: #FFF;
+        --text-color: #222;
+        --bkg-color: #FAF9F6;
+        --post-title-color: #303030;
+        --list-color: #5A5A5A;
+        --link-color: #268BD2;
+        --date-color: #515151;
+        --table-border-color: #E5E5E5;
+        --table-stripe-color: #F9F9F9;
+        --code-color: #000;
+        --code-background-color: #E5E5E5;
+        --code-block-color: #FFF;
+        --code-block-background-color: #272822;
+        --moon-sun-color: #FFF;
+        --moon-sun-background-color: #515151;
+    }
+    body.dark-theme {
+        --text-color: #EEE;
+        --bkg-color: #121212;
+        --post-title-color: #DBE2E9;
+        --list-color: #9D9D9D;
+        --link-color: #268BD2;
+        --date-color: #9A9A9A;
+        --table-border-color: #515151;
+        --table-stripe-color: #202020;
+        --code-color: #FFF;
+        --code-background-color: #515151;
+        --code-block-color: #FFF;
+        --code-block-background-color: #272822;
+    }
+    body {
+        background-color: var(--bkg-color);
+    }
+</style>
+
+</head>
+
+    <body class="dark-theme post-shell">
+        
+        <header class="post-topbar">
+            <a class="post-topbar-brand" href="/">Nabil Kara</a>
+            <nav class="post-topbar-nav" aria-label="Post navigation">
+                <a href="/posts/">Posts</a>
+                <a href="/posts/htb/">HTB</a>
+                <a href="/posts/ctf/">CTF</a>
+                <a href="/posts/tools/">Tools</a>
+                <a href="https://www.linkedin.com/in/nabil-kara-42b1211aa/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </nav>
+        </header>
+        
+        <div class="wrapper post-wrapper">
+            
+            <main class="content container post-reader">
+                <div class="post">
+  <div class="info">
+  <h1 class="post-title">
+    <a href="http://localhost:1313/posts/htb/facts/">Facts - Hack The Box machine</a>
+  </h1>
+
+  <div class="headline">
+    <div>
+      
+      
+      <time datetime=" 2026-06-03T00:00:00Z" class="post-date">
+        June 3, 2026
+      </time>
+      
+      <span> - </span>
+      <span class="reading-time">
+        
+          
+        
+
+        <span>2 mins read</span>
+      </span>
+    </div>
+
+    
+    <ul class="tags">
+      
+      <li class="tag-CMS">
+        <a href="http://localhost:1313/tags/cms">CMS</a>
+      </li>
+      
+      <li class="tag-linux">
+        <a href="http://localhost:1313/tags/linux">linux</a>
+      </li>
+      
+      <li class="tag-privelege escalation">
+        <a href="http://localhost:1313/tags/privelege-escalation">privelege escalation</a>
+      </li>
+      
+    </ul>
+    
+  </div>
+
+  
+  
+
+  
+</div>
+
+  <ul>
+<li>
+<p>Difficulty: Easy</p>
+</li>
+<li>
+<p>OS: Linux</p>
+</li>
+<li>
+<p>Author: LazyTitan333</p>
+</li>
+</ul>
+<p><img src="/posts/htb/facts/solved.png" alt=""></p>
+<p>An initial nmap scan reveals two open ports : <code>80</code> (HTTP) and <code>23</code> (SSH)</p>
+<p><img src="/posts/htb/facts/pasted-image-20260602233327.png" alt=""></p>
+<p>We start by exploring the web page :
+<img src="/posts/htb/facts/pasted-image-20260602233347.png" alt=""></p>
+<p>If we click <code>Start Exploring</code> we see a couple of facts , a search bar and a comments section. I browsed the facts and found nothing useful , except that the comments profiles are potential SSH usernames.
+We opt for directory enumeration ,for instance, we can use ffuf :</p>
+<p><img src="/posts/htb/facts/pasted-image-20260602233412.png" alt=""></p>
+<p>One output that catches the eye is /admin , visiting it redirects us to /admin/login :
+<img src="/posts/htb/facts/pasted-image-20260602233456.png" alt=""></p>
+<p>we create an account like this :
+<img src="/posts/htb/facts/pasted-image-20260602233521.png" alt=""></p>
+<p>For a while we may think that we got administrator rights since it shows <code>Welcome to the Admin Panel</code></p>
+<p><img src="/posts/htb/facts/pasted-image-20260602233603.png" alt=""></p>
+<p>but if we click the profile , our role is actually <code>client</code> ( Sadly ).</p>
+<p>One thing worth noting is that the page is built using <strong>Camaleon CMS</strong> and that the version is <code>2.9.0</code>. Searching for a related CVE we find the <strong>CVE-2024-46987</strong> and here&rsquo;s the <a href="https://github.com/Goultarde/CVE-2024-46987" target="_blank">PoC</a>. This is an <strong>LFI</strong> that affects this version of Camaleon CMS too.</p>
+<p><img src="/posts/htb/facts/pasted-image-20260602233700.png" alt=""></p>
+<p>Reading the /etc/passwd , we see two users at the end <code>trivia</code> and <code>william</code>.</p>
+<p><img src="/posts/htb/facts/pasted-image-20260602233714.png" alt=""></p>
+<p>We can safely guess here and try to read the <strong>user</strong> flag :</p>
+<p><img src="/posts/htb/facts/pasted-image-20260602233812.png" alt=""></p>
+<p>Since our initial Nmap scan revealed an open SSH port , I thought that we may take advantage of our <code>LFI</code> and find a private SSH key for one of these two users and this is what happened lol :</p>
+<p><img src="/posts/htb/facts/pasted-image-20260602233855.png" alt=""></p>
+<p>I already cracked the passphrase , so here is it :</p>
+<p><img src="/posts/htb/facts/pasted-image-20260602233917.png" alt=""></p>
+<p>Now we can SSH into the user <code>trivia</code> and try to escalate our privileges :</p>
+<p><img src="/posts/htb/facts/pasted-image-20260602233935.png" alt=""></p>
+<p><code>sudo -l</code> reveals an important finding : the user <code>trivia</code> can execute <code>facter</code> without requiring a password : <code>(ALL) NOPASSWD: /usr/bin/facter</code></p>
+<p>The immediate intuition is to search in GTFOBins and figure out how to exploit binary :</p>
+<p><img src="/posts/htb/facts/pasted-image-20260602234000.png" alt=""></p>
+<p>Oops, this didn&rsquo;t work :</p>
+<p><img src="/posts/htb/facts/pasted-image-20260602234025.png" alt=""></p>
+<p>We noticed in the <code>sudo -l</code> that the &ldquo;Environment Reset option&rdquo; <code>env_reset</code> is set , this blocks custom FACTERLIB, but a quick search reveals that facter supports &ndash;external-dir , so this was our way in :</p>
+<p><img src="/posts/htb/facts/pasted-image-20260602234058.png" alt=""></p>
+<p>Et voilà! we come to the end of this machine . Thanks to the author for the fun machine.</p>
+<p><strong>Note :</strong></p>
+<p>We could&rsquo;ve used the <strong>CVE-2026-1776</strong>&rsquo;s PoC that represents a bypass of the incomplete fix for <strong>CVE-2024-46987</strong></p>
+
+  
+  <hr>
+<div class="footer">
+    
+	    
+	    
+    
+</div>
+
+  
+</div>
+            </main>
+            
+  
+    <div class="article-toc " id="article-toc">
+    <div class="toc-wrapper">
+      <div class="toc-toolbar" aria-label="Contents panel controls">
+        <h4 id="contents"></h4>
+        <div>
+          <button type="button" data-toc-side title="Move contents panel" aria-label="Move contents panel">&#8644;</button>
+          <button type="button" data-toc-toggle title="Hide contents panel" aria-label="Hide contents panel">&minus;</button>
+        </div>
+      </div>
+      <nav id="TableOfContents"></nav>
+    </div>
+</div>
+<button class="toc-restore" type="button" data-toc-restore aria-label="Show contents panel">Contents</button>
+<script>
+(function () {
+  if (window.__nabilPostPanels) return;
+  window.__nabilPostPanels = true;
+
+  function ready(fn) {
+    if (document.readyState !== "loading") fn();
+    else document.addEventListener("DOMContentLoaded", fn);
+  }
+
+  ready(function () {
+    var body = document.body;
+    var toggle = document.querySelector("[data-toc-toggle]");
+    var restore = document.querySelector("[data-toc-restore]");
+    var side = document.querySelector("[data-toc-side]");
+
+    if (localStorage.getItem("post-toc-collapsed") === "true") {
+      body.classList.add("toc-collapsed");
+    }
+    if (localStorage.getItem("post-toc-side") === "left") {
+      body.classList.add("toc-left");
+    }
+
+    function setCollapsed(value) {
+      body.classList.toggle("toc-collapsed", value);
+      localStorage.setItem("post-toc-collapsed", value ? "true" : "false");
+    }
+
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        setCollapsed(true);
+      });
+    }
+    if (restore) {
+      restore.addEventListener("click", function () {
+        setCollapsed(false);
+      });
+    }
+    if (side) {
+      side.addEventListener("click", function () {
+        body.classList.toggle("toc-left");
+        localStorage.setItem("post-toc-side", body.classList.contains("toc-left") ? "left" : "right");
+      });
+    }
+  });
+})();
+</script>
+
+  
+
+        </div>
+    </body>
+</html>

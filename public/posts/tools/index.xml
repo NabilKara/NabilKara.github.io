@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Tools on Nabil Kara — CTF Writeups</title>
-		<link>http://localhost:4000/posts/tools/</link>
+		<link>http://localhost:1313/posts/tools/</link>
 		<description>Recent content in Tools on Nabil Kara — CTF Writeups</description>
 		<generator>Hugo</generator>
 		<language>en-us</language>
@@ -12,13 +12,13 @@
 		
 			<lastBuildDate>Tue, 09 Jun 2026 00:00:00 +0000</lastBuildDate>
 		
-			<atom:link href="http://localhost:4000/posts/tools/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="http://localhost:1313/posts/tools/index.xml" rel="self" type="application/rss+xml" />
 			<item>
-				<title>CSTI ZAP Active Scan Rule</title>
-				<link>http://localhost:4000/posts/tools/csti-zap/</link>
+				<title>A ZAP CSTI active scan rule</title>
+				<link>http://localhost:1313/posts/tools/csti-zap/</link>
 				<pubDate>Tue, 09 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:4000/posts/tools/csti-zap/</guid>
-				<description>&lt;p&gt;This post describes an active scan rule I implemented for OWASP ZAP to detect Command String/Template Injection (CSTI) patterns. I cover the motivation, detection heuristics, rule implementation, and examples of tuning it for low false positives.&lt;/p&gt;&#xA;&lt;p&gt;Content coming soon — edit this file to add your writeup, code snippets, and examples.&lt;/p&gt;</description>
+				<guid>http://localhost:1313/posts/tools/csti-zap/</guid>
+				<description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;I started to work on this project as an intern at Djezzy Optimum Télécom Algérie SPA , under the supervision of Mr. &lt;a href=&#34;https://www.linkedin.com/in/abdelkhalek-beraoud-707567245/&#34; target=&#34;_blank&#34;&gt;Beraoud Abdelkhalek&lt;/a&gt; who was behind the idea and  whose invaluable guidance, transformative advice, and remarkable patience supported the work throughout its development.&lt;/p&gt;&#xA;&lt;p&gt;The active scan rule described here was built as an alpha rule for ZAP. You find the code &lt;a href=&#34;https://github.com/NabilKara/zap-extensions&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;implementation-basis--the-csti-alert-paper&#34;&gt;Implementation basis : The CSTI-Alert paper&lt;/h2&gt;&#xA;&lt;p&gt;The methodology comes from the &lt;a href=&#34;https://www.eurecom.fr/en/publication/8608&#34; target=&#34;_blank&#34;&gt;paper&lt;/a&gt; : &lt;code&gt;{{alert(&#39;CSTI&#39;)}}: Large-Scale Detection of Client-Side Template Injection&lt;/code&gt;. The part we are concerned with  for this active scan rule  is not the large-scale crawling infrastructure itself, but the detection methodology:&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>
