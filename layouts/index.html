@@ -1,0 +1,82 @@
+{{ define "main" -}}
+<div class="home-layout">
+    <section class="home-hero">
+        <p class="home-kicker">Cybersecurity portfolio and writeups</p>
+        <h1>Nabil Kara</h1>
+        <p class="home-lead">
+            Cybersecurity student focused on web exploitation, cryptography, OSINT, AI security, Active Directory, and practical tooling.
+        </p>
+        <div class="home-quick-links" aria-label="Quick links">
+            <a href="/posts/htb/">HTB</a>
+            <a href="/posts/ctf/">CTF</a>
+            <a href="/posts/tools/">Tools</a>
+            <a href="/about/">About</a>
+            {{ with .Site.Params.github_url }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">GitHub</a>{{ end }}
+            {{ with .Site.Params.linkedin_url }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>{{ end }}
+        </div>
+    </section>
+
+    <section class="home-section">
+        <div class="home-section-heading">
+            <h2>Featured Work</h2>
+            <p>Selected posts that best represent the site.</p>
+        </div>
+        <div class="home-featured-grid">
+            {{ range slice "/posts/tools/csti-zap" "/posts/htb/facts" "/posts/CTF/leaky_rsa" }}
+                {{ with $.Site.GetPage . }}
+                {{ $category := replaceRE "^/posts/([^/]+)/.*" "$1" .RelPermalink | upper }}
+                <article class="home-card">
+                    <p class="home-card-meta">{{ $category }}{{ with .Params.tags }} / {{ delimit (first 2 .) " / " }}{{ end }}</p>
+                    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                    <p>{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 140 }}{{ end }}</p>
+                </article>
+                {{ end }}
+            {{ end }}
+        </div>
+    </section>
+
+    <section class="home-section">
+        <div class="home-section-heading">
+            <h2>Explore</h2>
+            <p>Jump straight into the type of work you want to read.</p>
+        </div>
+        <div class="home-explore-grid">
+            <a class="home-route" href="/posts/htb/">
+                <strong>HTB Writeups</strong>
+                <span>Machine notes, enumeration, exploitation, and privilege escalation.</span>
+            </a>
+            <a class="home-route" href="/posts/ctf/">
+                <strong>CTF Writeups</strong>
+                <span>Crypto, web, and challenge-solving notes.</span>
+            </a>
+            <a class="home-route" href="/posts/tools/">
+                <strong>Tools & Research</strong>
+                <span>ZAP rules, scripts, integrations, and security experiments.</span>
+            </a>
+        </div>
+    </section>
+
+    <section class="home-section">
+        <div class="home-section-heading">
+            <h2>Latest Posts</h2>
+            <p>Recent notes from all categories.</p>
+        </div>
+        <ul class="home-latest-list">
+            {{ range first 6 (where .Site.RegularPages "Type" "posts") }}
+            <li>
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+            </li>
+            {{ end }}
+        </ul>
+    </section>
+
+    <section class="home-about">
+        <h2>About</h2>
+        <p>
+            I use this site to document what I build, break, and learn across CTFs, labs, web security, Active Directory, cryptography, and tooling.
+        </p>
+        <a href="/about/">Read more</a>
+    </section>
+</div>
+{{- end }}

@@ -1,0 +1,60 @@
+<div class="article-toc {{if .Site.Params.layoutReverse}}layout-reverse{{end}}" id="article-toc">
+    <div class="toc-wrapper">
+      <div class="toc-toolbar" aria-label="Contents panel controls">
+        <h4 id="contents"></h4>
+        <div>
+          <button type="button" data-toc-side title="Move contents panel" aria-label="Move contents panel">&#8644;</button>
+          <button type="button" data-toc-toggle title="Hide contents panel" aria-label="Hide contents panel">&minus;</button>
+        </div>
+      </div>
+      {{ .TableOfContents }}
+    </div>
+</div>
+<button class="toc-restore" type="button" data-toc-restore aria-label="Show contents panel">Contents</button>
+<script>
+(function () {
+  if (window.__nabilPostPanels) return;
+  window.__nabilPostPanels = true;
+
+  function ready(fn) {
+    if (document.readyState !== "loading") fn();
+    else document.addEventListener("DOMContentLoaded", fn);
+  }
+
+  ready(function () {
+    var body = document.body;
+    var toggle = document.querySelector("[data-toc-toggle]");
+    var restore = document.querySelector("[data-toc-restore]");
+    var side = document.querySelector("[data-toc-side]");
+
+    if (localStorage.getItem("post-toc-collapsed") === "true") {
+      body.classList.add("toc-collapsed");
+    }
+    if (localStorage.getItem("post-toc-side") === "left") {
+      body.classList.add("toc-left");
+    }
+
+    function setCollapsed(value) {
+      body.classList.toggle("toc-collapsed", value);
+      localStorage.setItem("post-toc-collapsed", value ? "true" : "false");
+    }
+
+    if (toggle) {
+      toggle.addEventListener("click", function () {
+        setCollapsed(true);
+      });
+    }
+    if (restore) {
+      restore.addEventListener("click", function () {
+        setCollapsed(false);
+      });
+    }
+    if (side) {
+      side.addEventListener("click", function () {
+        body.classList.toggle("toc-left");
+        localStorage.setItem("post-toc-side", body.classList.contains("toc-left") ? "left" : "right");
+      });
+    }
+  });
+})();
+</script>

@@ -10,8 +10,7 @@ pluralizelisttitles = false
 [params]
   brand = "Nabil Kara"                        
   brand_image = "/images/logo.png"        
-  description = """Hi I'm Nabil a cyber security student at USTHB , Algeria ,  and a CTF player at TroJeun , with strong intrest in cryptography , OSINT
-  and Web exploitation"""              
+  description = """Hi, I'm Nabil, a cybersecurity student at USTHB, Algeria, with a strong interest in cryptography, OSINT, AI security, Active Directory, and web exploitation."""              
   dark_mode = true
 
   front_page_content = ["posts"]
@@ -20,31 +19,6 @@ pluralizelisttitles = false
   menu = [
   { Name = "Posts", URL = "/posts/", HasChildren = true, Limit = 5 },
   ]
-
-[menu]
-  [[menu.main]]
-    name = "Posts"
-    url = "/posts/"
-    weight = 10
-
-  [[menu.main]]
-    parent = "Posts"
-    name = "HTB"
-    url = "/posts/htb/"
-    weight = 1
-
-  [[menu.main]]
-    parent = "Posts"
-    name = "CTF"
-    url = "/posts/ctf/"
-    weight = 2
-
-  [[menu.main]]
-    parent = "Posts"
-    name = "Tools"
-    url = "/posts/tools/"
-    weight = 3
-
 
   # Social links
   github_url = "https://github.com/NabilKara"
@@ -90,6 +64,30 @@ pluralizelisttitles = false
   table_border_color_dark = "#515151"
   table_stripe_color_dark = "#202020"
   text_color_dark = "#EEE"
+
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 10
+
+  [[menu.main]]
+    parent = "Posts"
+    name = "HTB"
+    url = "/posts/htb/"
+    weight = 1
+
+  [[menu.main]]
+    parent = "Posts"
+    name = "CTF"
+    url = "/posts/ctf/"
+    weight = 2
+
+  [[menu.main]]
+    parent = "Posts"
+    name = "Tools"
+    url = "/posts/tools/"
+    weight = 3
 
 [taxonomies]
   series = "series"
