@@ -183,9 +183,9 @@ static EngineConfidence scoreEngineDetectionConfidence(
 The confidence score is assigned as follows:
 
 - global-only evidence is `low` confidence;
-- global plus active usage is high for engines where tag evidence is expected but absent;
-- global plus active usage is very high for engines without applicable tag markers;
-- global plus script-type or attribute evidence is very high.
+- global plus active usage is `high` for engines where tag evidence is expected but absent;
+- global plus active usage is `very high` for engines without applicable tag markers;
+- global plus script-type or attribute evidence is `very high`.
 
 ZAP alert confidence then maps `LOW` to low, `HIGH` to medium, and `VERY_HIGH` to high. (I did not find a better choice.)
 
