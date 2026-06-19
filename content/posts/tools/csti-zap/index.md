@@ -26,7 +26,7 @@ Thanks to the rich and huge ZAP ecosystem (Client Spider add-on, Selenium integr
 
 ## Execution Workflow
 
-```mermaid
+<div class="mermaid">
 flowchart TB
  subgraph P1["<b>1. SURFACE COLLECTION</b>"]
     direction TB
@@ -76,7 +76,12 @@ flowchart TB
     style P2 fill:#f0fdf4,stroke:#16a34a,stroke-width:3px,color:#14532d
     style P3 fill:#fff7ed,stroke:#ea580c,stroke-width:3px,color:#7c2d12
     style P4 fill:#fef2f2,stroke:#dc2626,stroke-width:3px,color:#7f1d1d
-```
+</div>
+
+<script type="module">
+  import mermaid from '[https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs](https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs)';
+  mermaid.initialize({ startOnLoad: true });
+</script>
 
 
 
