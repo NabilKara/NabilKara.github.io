@@ -8,6 +8,7 @@ pluralizelisttitles = false
   pagerSize = 10
 
 [params]
+  mermaid = true
   brand = "Nabil Kara"                        
   brand_image = "/images/logo.png"        
   description = """Hi, I'm Nabil, a cybersecurity student at USTHB, Algeria, with a strong interest in cryptography, OSINT, AI security, Active Directory, and web exploitation."""              
