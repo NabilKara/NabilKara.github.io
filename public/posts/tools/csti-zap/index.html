@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
@@ -104,13 +105,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.163.0">
+<meta name="generator" content="Hugo 0.163.3">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.20df1a47a62670991e21d194f61c843c27664d145e016ff10b45793759fdd24f.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.1d64c8693c00ddcd4da23e0906058c905a593c5eda78bfffeeb42139b0204ee6.css">
 
 
     
@@ -224,10 +225,10 @@
 </div>
 
   <h2 id="introduction">Introduction</h2>
-<p>I started to work on this project as an intern at Djezzy Optimum Télécom Algérie SPA , under the supervision of Mr. <a href="https://www.linkedin.com/in/abdelkhalek-beraoud-707567245/" target="_blank">Beraoud Abdelkhalek</a> who was behind the idea and  whose invaluable guidance, transformative advice, and remarkable patience supported the work throughout its development.</p>
-<p>The active scan rule described here was built as an alpha rule for ZAP. You find the code <a href="https://github.com/NabilKara/zap-extensions" target="_blank">here</a></p>
-<h2 id="implementation-basis--the-csti-alert-paper">Implementation basis : The CSTI-Alert paper</h2>
-<p>The methodology comes from the <a href="https://www.eurecom.fr/en/publication/8608" target="_blank">paper</a> : <code>{{alert('CSTI')}}: Large-Scale Detection of Client-Side Template Injection</code>. The part we are concerned with  for this active scan rule  is not the large-scale crawling infrastructure itself, but the detection methodology:</p>
+<p>I started to work on this project as an intern at Djezzy Optimum Télécom Algérie SPA, under the supervision of Mr. <a href="https://www.linkedin.com/in/abdelkhalek-beraoud-707567245/" target="_blank">Beraoud Abdelkhalek</a> who was behind the idea and whose invaluable guidance, transformative advice, and remarkable patience supported the work throughout its development.</p>
+<p>The active scan rule described here was built as an alpha rule for ZAP. You can find the code <a href="https://github.com/NabilKara/zap-extensions" target="_blank">here</a>.</p>
+<h2 id="implementation-basis-the-csti-alert-paper">Implementation Basis: The CSTI-Alert Paper</h2>
+<p>The methodology comes from the <a href="https://www.eurecom.fr/en/publication/8608" target="_blank">paper</a>: <code>{{alert('CSTI')}}: Large-Scale Detection of Client-Side Template Injection</code>. The part we are concerned with for this active scan rule is not the large-scale crawling infrastructure itself, but the detection methodology:</p>
 <ol>
 <li>Open the target in a real browser.</li>
 <li>Detect whether a known client-side template engine is present through various methods as discussed later.</li>
@@ -236,14 +237,83 @@
 <li>Inject that payload.</li>
 <li>Compare the rendered page before and after injection.</li>
 </ol>
-<p>Thanks to the rich and huge ZAP ecosystem (Client Spider Add-On  , Selenium integration , Alerts model &hellip; ) I focused only on fitting CSTI-Alert&rsquo;s browser-driven proof into ZAP&rsquo;s environment.</p>
+<p>Thanks to the rich and huge ZAP ecosystem (Client Spider add-on, Selenium integration, Alerts model, &hellip;) I focused only on fitting CSTI-Alert&rsquo;s browser-driven proof into ZAP&rsquo;s environment.</p>
+<h2 id="execution-workflow">Execution Workflow</h2>
+
+
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+
+    const lsTheme = localStorage.getItem("theme")
+    const hugoTheme = document.body.classList.contains("dark-theme") ? "dark" : null
+    const currTheme = lsTheme ? lsTheme : hugoTheme;
+    const mermaidTheme = currTheme == "light" ? "default" : "dark"
+
+    mermaid.initialize({startOnLoad: true, theme: mermaidTheme});
+</script>
+
+
+
+<div class="mermaid">
+flowchart TB
+ subgraph P1["<b>1. SURFACE COLLECTION</b>"]
+  direction TB
+    B["Collect inputs and links"]
+    B1["Client Spider components<br>input, links"]
+    B2["HTML response fallback<br>textarea"]
+  end
+ subgraph P2["<b>2. TEMPLATE ENGINE DETECTION</b>"]
+  direction TB
+    C["Open page in Selenium"]
+    C1["Wait for page settlement"]
+    C2["Check global variable presence<br>+ heuristics"]
+    C5["Assign confidence<br>LOW / HIGH / VERY_HIGH"]
+  end
+ subgraph P3["<b>3. PAYLOAD INJECTION</b>"]
+  direction TB
+    E["Select engine-specific payload"]
+    E1["Math payload example<br>{{11111*11111}} -&gt; 123454321"]
+    E2["Object payload example<br>{{this}} -&gt; [object Object]"]
+    F["Compare with baseline"]
+    G{"Count increased?"}
+  end
+ subgraph P4["<b>4. DETECTION RESULT</b>"]
+  direction TB
+    J["Confirmed CSTI"]
+    J1["Raise HIGH risk ZAP alert"]
+    Z["No confirmed CSTI"]
+  end
+  B --> B1 & B2
+  C --> C1
+  C1 --> C2
+  C2 --> C5
+  E --> E1 & E2
+  E1 --> F
+  E2 --> F
+  F --> G
+  J --> J1
+  A["Target page"] --> P1
+  P1 --> P2
+  P2 --> P3
+  G -- Yes --> J
+  G -- No --> Z
+
+   G:::decision
+  classDef decision fill:#fff7ed,stroke:#ea580c,stroke-width:2px
+  style P1 fill:#eef6ff,stroke:#2563eb,stroke-width:3px,color:#1e3a8a
+  style P2 fill:#f0fdf4,stroke:#16a34a,stroke-width:3px,color:#14532d
+  style P3 fill:#fff7ed,stroke:#ea580c,stroke-width:3px,color:#7c2d12
+  style P4 fill:#fef2f2,stroke:#dc2626,stroke-width:3px,color:#7f1d1d
+
+</div>
+
 <h2 id="architecture">Architecture</h2>
 <p>The implementation is split into two classes:</p>
 <ul>
-<li><code>CstiActiveScanRule</code> which is the main class and contains the main features : active scan lifecycle, Client Spider integration, surface discovery, shared WebDriver management, URL and DOM probing, snapshot comparison, and alert generation.</li>
-<li>On the other side , <code>ClientSideEngineDetector</code> owns engine metadata: global identifiers, render and compile functions signatures &hellip;</li>
+<li><code>CstiActiveScanRule</code> which is the main class and contains the main features: active scan lifecycle, Client Spider integration, surface discovery, shared WebDriver management, URL and DOM probing, snapshot comparison, and alert generation.</li>
+<li>On the other side, <code>ClientSideEngineDetector</code> owns engine metadata: global identifiers, render and compile function signatures, &hellip;</li>
 </ul>
-<p>The rule extends <code>AbstractAppPlugin</code>, since the implementation is page oriented .</p>
+<p>The rule extends <code>AbstractAppPlugin</code>, since the implementation is page-oriented.</p>
 <p>The browser model is shared across all the active scan rule instances. This can be considered a limitation but I opted for this choice because browser startup consumes too much resources, and CSTI probing may happen for many pages. The current code uses a static <code>AtomicReference&lt;WebDriver&gt;</code>, a lock, and an active-instance counter:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> AtomicReference<span style="color:#f92672">&lt;</span>WebDriver<span style="color:#f92672">&gt;</span> sharedDriver <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AtomicReference<span style="color:#f92672">&lt;&gt;</span>(<span style="color:#66d9ef">null</span>);
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> java.<span style="color:#a6e22e">util</span>.<span style="color:#a6e22e">concurrent</span>.<span style="color:#a6e22e">locks</span>.<span style="color:#a6e22e">ReentrantLock</span> browserLock <span style="color:#f92672">=</span>
@@ -254,16 +324,15 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> AtomicInteger activeInstances <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AtomicInteger(0);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> AtomicBoolean urlSetReady <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> AtomicBoolean(<span style="color:#66d9ef">false</span>);
-</span></span></code></pre></div><p>The rule also deduplicates scans by stripping query strings and fragments from the URL, which reduces browser work .</p>
+</span></span></code></pre></div><p>The rule also deduplicates scans by stripping query strings and fragments from the URL, which reduces browser work.</p>
 <p>Browser selection is configurable through <code>rules.ascanalpha.csti.browserid</code>. Unsupported or unknown browser identifiers fall back to Firefox Headless. The code supports Firefox, Chrome, and Edge variants.</p>
 <h2 id="more-details-on-the-methodology">More details on the methodology</h2>
 <p>The scan has six practical phases.</p>
-<p>The first step is to use the <code>Client Spider</code> add-on to extract <code>input</code> , <code>textarea</code> components
-and query strings .</p>
-<p>Following up some tests and discussions I made with the ZAP maintainers ( which were very helpful and nice btw ) I&rsquo;ve concluded that the Client Spider has some gaps around textareas and submission nodes and doesn&rsquo;t report them. Therefore , my implementation supplements spider data by parsing the original HTML response for <code>textarea</code> tags.</p>
-<p>Engine detection loads the  page in the shared Selenium browser and delegates to <code>ClientSideEngineDetector.detect(driver, url)</code>. The detector first checks for known global objects, then searches for active render or compile calls, script template blocks, and template-specific DOM attributes.</p>
+<p>The first step is to use the <code>Client Spider</code> add-on to extract <code>input</code> and <code>textarea</code> components and query strings.</p>
+<p>Following up some tests and discussions I made with the ZAP maintainers (which were very helpful and nice, by the way), I&rsquo;ve concluded that the Client Spider has some gaps around textareas and submission nodes and doesn&rsquo;t report them. Therefore, my implementation supplements spider data by parsing the original HTML response for <code>textarea</code> tags.</p>
+<p>Engine detection loads the page in the shared Selenium browser and delegates to <code>ClientSideEngineDetector.detect(driver, url)</code>. The detector first checks for known global objects, then searches for active render or compile calls, script template blocks, and template-specific DOM attributes.</p>
 <p>Payload profile selection maps the detected engine to a <code>PayloadDefinition</code>. The current code has profiles for every engine in the detector&rsquo;s global map. Math-capable engines use arithmetic expressions based on <code>11111*11111</code>, which evaluates to <code>123454321</code>. Non-math engines use object-style payloads that expect <code>[object Object]</code>.</p>
-<p>URL probing operates only on URL parameters belonging to the current page, not link-derived parameters for other pages. For each parameter, the scanner captures a baseline snapshot, replaces only that parameter value with the payload, loads the attack URL, then compares snapshots, we preserve other query parameters and fragments</p>
+<p>URL probing operates only on URL parameters belonging to the current page, not link-derived parameters for other pages. For each parameter, the scanner captures a baseline snapshot, replaces only that parameter value with the payload, loads the attack URL, then compares snapshots. Other query parameters and fragments are preserved:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> String <span style="color:#a6e22e">replaceParameterValue</span>(String targetUrl, String paramName, String payload) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> queryIndex <span style="color:#f92672">=</span> targetUrl.<span style="color:#a6e22e">indexOf</span>(<span style="color:#e6db74">&#39;?&#39;</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (queryIndex <span style="color:#f92672">&lt;</span> 0) {
@@ -303,34 +372,36 @@ and query strings .</p>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> base <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;?&#34;</span> <span style="color:#f92672">+</span> String.<span style="color:#a6e22e">join</span>(<span style="color:#e6db74">&#34;&amp;&#34;</span>, parts) <span style="color:#f92672">+</span> fragment;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>DOM input probing loads the page, locates candidate inputs by ID or name, injects the payload, dispatches <code>input</code>, <code>change</code>, <code>keyup</code>, and <code>blur</code>, fills other form fields with safe dummy values, and attempts same-origin form submission when there is no file input.</p>
-<p>A form may have multiple vulnerable fields , thus , when dealing with math-capable engines like <code>Angular</code> and <code>vue</code> , we send unique incremental payloads , therefore ,  vulnerable fields can be distinguished and reported appropriately. Non-math engines are probed one field at a time because <code>[object Object]</code> is not unique.</p>
+<p>A form may have multiple vulnerable fields. When dealing with math-capable engines like <code>Angular</code> and <code>vue</code>, we send unique incremental payloads so vulnerable fields can be distinguished and reported appropriately. Non-math engines are probed one field at a time because <code>[object Object]</code> is not unique.</p>
 <p>Alerting raises informational alerts for engine detection and payload probing, then raises a high-risk CSTI alert only when the expected result appears.</p>
 <h2 id="engine-detection-and-confidence-scoring">Engine Detection and Confidence Scoring</h2>
 <p>The detector uses three heuristics. H1 is a global-object check, such as <code>angular.version</code>, <code>Vue</code>, <code>Handlebars</code>, or <code>nunjucks</code>. H2 is active usage evidence, found by searching inline scripts for render, compile, mount, controller, directive, or framework initialization signatures. H3 is template marker evidence, found through <code>script[type]</code> template blocks or DOM attributes such as <code>ng-app</code>, <code>v-model</code>, <code>x-data</code>, or <code>data-ember-action</code>.</p>
-<p>The global check is implemented as browser-executed JavaScript over a dotted expression:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String GLOBAL_PROBE_PAYLOAD <span style="color:#f92672">=</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;try {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  var parts = String(arguments[0]).split(&#39;.&#39;);&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  var obj = window;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  for (var i = 0; i &lt; parts.length; i++) {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;    if (obj == null || obj === undefined) return false;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;    obj = obj[parts[i]];&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  }&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  return obj !== undefined &amp;&amp; obj !== null;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;} catch (e) { return false; }&#34;</span>;
-</span></span></code></pre></div><p>The active-call corpus is collected from inline scripts and the full page HTML, then searched in Java:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String FUNCTION_CALL_PAYLOAD <span style="color:#f92672">=</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;try {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  var scripts = document.querySelectorAll(&#39;script:not([src])&#39;);&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  var src = &#39;&#39;;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  for (var i = 0; i &lt; scripts.length; i++) {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;    src += scripts[i].textContent + &#39;\\n&#39;;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  }&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  return JSON.stringify({&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;    script: src,&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;    html: document.documentElement.outerHTML&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  });&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;} catch(e) { return &#39;{}&#39;; }&#34;</span>;
+<p>The global check is implemented as browser-executed JavaScript over a dotted expression (<code>GLOBAL_PROBE_PAYLOAD</code> constant):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">parts</span> <span style="color:#f92672">=</span> String(<span style="color:#a6e22e">arguments</span>[<span style="color:#ae81ff">0</span>]).<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;.&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> window;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">parts</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">obj</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">||</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">===</span> <span style="color:#66d9ef">undefined</span>) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">obj</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">obj</span>[<span style="color:#a6e22e">parts</span>[<span style="color:#a6e22e">i</span>]];
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">!==</span> <span style="color:#66d9ef">undefined</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">obj</span> <span style="color:#f92672">!==</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The active-call corpus is collected from inline scripts and the full page HTML, then searched in Java (<code>FUNCTION_CALL_PAYLOAD</code> constant):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">scripts</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">querySelectorAll</span>(<span style="color:#e6db74">&#34;script:not([src])&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">src</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">scripts</span>.<span style="color:#a6e22e">length</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">src</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">scripts</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">textContent</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\\n&#34;</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">script</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">src</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">html</span><span style="color:#f92672">:</span> document.<span style="color:#a6e22e">documentElement</span>.<span style="color:#a6e22e">outerHTML</span>,
+</span></span><span style="display:flex;"><span>  });
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;{}&#34;</span>;
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>The confidence score is deliberately not the vulnerability proof. It only describes how believable the engine detection is. The final high-risk alert still requires payload evidence.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> EngineConfidence <span style="color:#a6e22e">scoreEngineDetectionConfidence</span>(
 </span></span><span style="display:flex;"><span>        ClientSideEngineDetector.<span style="color:#a6e22e">DetectionResult</span> engine) {
@@ -357,14 +428,14 @@ and query strings .</p>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> EngineConfidence.<span style="color:#a6e22e">LOW</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>The way is scored confidence is :</p>
+</span></span></code></pre></div><p>The confidence score is assigned as follows:</p>
 <ul>
-<li>global-only evidence is <code>low</code> confidence</li>
-<li>global plus active usage is high for engines where tag evidence is expected but absent;</li>
-<li>global plus active usage is very high for engines without applicable tag markers;</li>
-<li>global plus script-type or attribute evidence is very high.</li>
+<li>global-only evidence is <code>low</code> confidence;</li>
+<li>global plus active usage is <code>high</code> for engines where tag evidence is expected but absent;</li>
+<li>global plus active usage is <code>very high</code> for engines without applicable tag markers;</li>
+<li>global plus script-type or attribute evidence is <code>very high</code>.</li>
 </ul>
-<p>ZAP alert confidence then maps <code>LOW</code> to low, <code>HIGH</code> to medium, and <code>VERY_HIGH</code> to high. ( Didn&rsquo;t find a better choice)</p>
+<p>ZAP alert confidence then maps <code>LOW</code> to low, <code>HIGH</code> to medium, and <code>VERY_HIGH</code> to high. (I did not find a better choice.)</p>
 <h2 id="payload-strategy">Payload Strategy</h2>
 <p>The arithmetic design centers on <code>11111*11111</code>. The expected result, <code>123454321</code>, is deterministic and uncommon enough to be useful as evidence. For engines with expression syntax, the delimiter changes but the operation stays the same. This lets the scanner keep confirmation logic simple: inject engine-specific syntax, then search for a common expected result.</p>
 <p>The code models this as <code>PayloadDefinition(engineName, payload, expectedResult, kind)</code>. Math payloads support unique operands through <code>withOperand</code>, which is used during batch DOM probing:</p>
@@ -381,34 +452,37 @@ and query strings .</p>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>The non-math entries are important. Those payloads cannot use unique operands, so the DOM probing code isolates them one field at a time.</p>
 <h2 id="baseline-versus-attack-snapshot-comparison">Baseline-Versus-Attack Snapshot Comparison</h2>
-<p>The rule does not treat &ldquo;expected result appears somewhere&rdquo; as sufficient evidence. It first counts occurrences of the expected result in the baseline page, then repeats the count after injection, this is done just in case , although the choice of payloads is unique to a certain extent , but we take this  edge case into consideration .
+<p>The rule does not treat &ldquo;expected result appears somewhere&rdquo; as sufficient evidence. It first counts occurrences of the expected result in the baseline page, then repeats the count after injection. This is done just in case: although the choice of payloads is unique to a certain extent, we take this edge case into consideration.
 A probe only matches if the attacked snapshot exceeds the baseline in visible text or full HTML:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">record</span> <span style="color:#a6e22e">ReflectionSnapshot</span>(<span style="color:#66d9ef">int</span> textMatches, <span style="color:#66d9ef">int</span> htmlMatches) {
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">exceeds</span>(ReflectionSnapshot other) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> textMatches <span style="color:#f92672">&gt;</span> other.<span style="color:#a6e22e">textMatches</span> <span style="color:#f92672">||</span> htmlMatches <span style="color:#f92672">&gt;</span> other.<span style="color:#a6e22e">htmlMatches</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String SNAPSHOT_PAYLOAD <span style="color:#f92672">=</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;try {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  var expected = String(arguments[0] || &#39;&#39;);&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  function count(haystack, needle) {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;    if (!haystack || !needle) return 0;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;    var count = 0, index = 0;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;    while ((index = haystack.indexOf(needle, index)) !== -1) {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;      count++;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;      index += needle.length;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;    }&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;    return count;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  }&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  var text = document.body ? document.body.innerText : &#39;&#39;;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  var html = document.documentElement ? document.documentElement.outerHTML : &#39;&#39;;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  return {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;    textMatches: count(text, expected),&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;    htmlMatches: count(html, expected)&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  };&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;} catch (e) { return { textMatches: 0, htmlMatches: 0, error: String(e) }; }&#34;</span>;
+</span></span></code></pre></div><p><code>SNAPSHOT_PAYLOAD</code> constant:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">expected</span> <span style="color:#f92672">=</span> String(<span style="color:#a6e22e">arguments</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">||</span> <span style="color:#e6db74">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">count</span>(<span style="color:#a6e22e">haystack</span>, <span style="color:#a6e22e">needle</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">haystack</span> <span style="color:#f92672">||</span> <span style="color:#f92672">!</span><span style="color:#a6e22e">needle</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">count</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">index</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> ((<span style="color:#a6e22e">index</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">haystack</span>.<span style="color:#a6e22e">indexOf</span>(<span style="color:#a6e22e">needle</span>, <span style="color:#a6e22e">index</span>)) <span style="color:#f92672">!==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">count</span><span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">index</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">needle</span>.<span style="color:#a6e22e">length</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">count</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">text</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">body</span> <span style="color:#f92672">?</span> document.<span style="color:#a6e22e">body</span>.<span style="color:#a6e22e">innerText</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">html</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">documentElement</span> <span style="color:#f92672">?</span> document.<span style="color:#a6e22e">documentElement</span>.<span style="color:#a6e22e">outerHTML</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">textMatches</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">count</span>(<span style="color:#a6e22e">text</span>, <span style="color:#a6e22e">expected</span>),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">htmlMatches</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">count</span>(<span style="color:#a6e22e">html</span>, <span style="color:#a6e22e">expected</span>),
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> { <span style="color:#a6e22e">textMatches</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">htmlMatches</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">error</span><span style="color:#f92672">:</span> String(<span style="color:#a6e22e">e</span>) };
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h2 id="page-settlement">Page Settlement</h2>
-<p>Framework rendering is asynchronous , so  a page can report a successful navigation before client-side rendering has stabilized. The rule avoids fixed sleeps and instead uses a bounded <code>FluentWait</code> around a <code>MutationObserver</code>-backed readiness check ( custom Selenium explicit wait):</p>
+<p>Framework rendering is asynchronous, so a page can report a successful navigation before client-side rendering has stabilized. The rule avoids fixed sleeps and instead uses a bounded <code>FluentWait</code> around a <code>MutationObserver</code>-backed readiness check (custom Selenium explicit wait):</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">waitForPageToSettle</span>(WebDriver driver) {
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
 </span></span><span style="display:flex;"><span>            Wait<span style="color:#f92672">&lt;</span>WebDriver<span style="color:#f92672">&gt;</span> wait <span style="color:#f92672">=</span>
@@ -427,53 +501,53 @@ A probe only matches if the attacked snapshot exceeds the baseline in visible te
 </span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><p>The function updates a timestamp whenever the DOM changes and returns true when <code>document.readyState === 'complete'</code> and the DOM has been quiet long enough:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> String PAGE_SETTLED_PAYLOAD <span style="color:#f92672">=</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;try {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;  var quietMillis = Number(arguments[0] || 200);&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;  if (!window.__zapCstiWaitState) {&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;    window.__zapCstiWaitState = { lastMutation: Date.now() };&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;    new MutationObserver(function() {&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;      window.__zapCstiWaitState.lastMutation = Date.now();&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;    }).observe(document.documentElement || document, {&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;      subtree: true,&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;      childList: true,&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;      attributes: true,&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;      characterData: true&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;    });&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;  }&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;  var ready = document.readyState === &#39;complete&#39;;&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;  var domQuiet = Date.now() - window.__zapCstiWaitState.lastMutation &gt;= quietMillis;&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;  return ready &amp;&amp; domQuiet;&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;} catch (e) {&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;  return document.readyState === &#39;complete&#39;;&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;}&#34;</span>;
+</span></span></code></pre></div><p>The function updates a timestamp whenever the DOM changes and returns true when <code>document.readyState === 'complete'</code> and the DOM has been quiet long enough (<code>PAGE_SETTLED_PAYLOAD</code> constant):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">quietMillis</span> <span style="color:#f92672">=</span> Number(<span style="color:#a6e22e">arguments</span>[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">||</span> <span style="color:#ae81ff">200</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>window.<span style="color:#a6e22e">__zapCstiWaitState</span>) {
+</span></span><span style="display:flex;"><span>    window.<span style="color:#a6e22e">__zapCstiWaitState</span> <span style="color:#f92672">=</span> { <span style="color:#a6e22e">lastMutation</span><span style="color:#f92672">:</span> Date.<span style="color:#a6e22e">now</span>() };
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">MutationObserver</span>(<span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex;"><span>      window.<span style="color:#a6e22e">__zapCstiWaitState</span>.<span style="color:#a6e22e">lastMutation</span> <span style="color:#f92672">=</span> Date.<span style="color:#a6e22e">now</span>();
+</span></span><span style="display:flex;"><span>    }).<span style="color:#a6e22e">observe</span>(document.<span style="color:#a6e22e">documentElement</span> <span style="color:#f92672">||</span> document, {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">subtree</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">childList</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">attributes</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">characterData</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>,
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">ready</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">readyState</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;complete&#34;</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">domQuiet</span> <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>    Date.<span style="color:#a6e22e">now</span>() <span style="color:#f92672">-</span> window.<span style="color:#a6e22e">__zapCstiWaitState</span>.<span style="color:#a6e22e">lastMutation</span> <span style="color:#f92672">&gt;=</span> <span style="color:#a6e22e">quietMillis</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">ready</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">domQuiet</span>;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> document.<span style="color:#a6e22e">readyState</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;complete&#34;</span>;
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h2 id="dom-form-probing">DOM Form Probing</h2>
-<p>DOM input probing is the most browser-dependent part of the implementation. The injected JavaScript finds targets by ID or name, adapts payload values for input types such as <code>email</code>, <code>url</code>, and <code>tel</code>, fills non-target fields with dummy values and finally dispatches the required events.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;            if (!submitObserved) {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;              if (typeof form.requestSubmit === &#39;function&#39;) {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;                try {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;                  if (submitter) {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;                    form.requestSubmit(submitter);&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;                  } else {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;                    form.requestSubmit();&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;                  }&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;                  submitObserved = true;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;                } catch (e) {}&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;              }&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;            }&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;            if (!submitObserved &amp;&amp; submitter) {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;              try {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;                submitter.click();&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;                submitObserved = true;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;              } catch (e) {}&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;            }&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;            if (!submitObserved) {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;              try {&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;                HTMLFormElement.prototype.submit.call(form);&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;                submitObserved = true;&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;              } catch (e) {}&#34;</span> <span style="color:#f92672">+</span>
-</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;            }&#34;</span> <span style="color:#f92672">+</span>
+<p>DOM input probing is the most browser-dependent part of the implementation. The injected JavaScript finds targets by ID or name, adapts payload values for input types such as <code>email</code>, <code>url</code>, and <code>tel</code>, fills non-target fields with dummy values, and finally dispatches the required events.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">submitObserved</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">form</span>.<span style="color:#a6e22e">requestSubmit</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#34;function&#34;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">submitter</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">form</span>.<span style="color:#a6e22e">requestSubmit</span>(<span style="color:#a6e22e">submitter</span>);
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">form</span>.<span style="color:#a6e22e">requestSubmit</span>();
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">submitObserved</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {}
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">submitObserved</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">submitter</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">submitter</span>.<span style="color:#a6e22e">click</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">submitObserved</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">submitObserved</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">HTMLFormElement</span>.<span style="color:#a6e22e">prototype</span>.<span style="color:#a6e22e">submit</span>.<span style="color:#a6e22e">call</span>(<span style="color:#a6e22e">form</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">submitObserved</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>  } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">e</span>) {}
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>The distinction between math and object payloads affects probing strategy:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">private</span> List<span style="color:#f92672">&lt;</span>ProbeResult<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">probeDomInputs</span>(
 </span></span><span style="display:flex;"><span>        WebDriver driver,
@@ -489,17 +563,17 @@ A probe only matches if the attacked snapshot exceeds the baseline in visible te
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> probeDomInputsIndividually(driver, pageUrl, inputSurfaces, payloadDefinition, attempts);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h2 id="some-screenshots">Some screenshots</h2>
-<p>The following screenshots illustrate the rule in action :</p>
+<p>The following screenshots illustrate the rule in action:</p>
 <p><img src="/posts/tools/csti-zap/screenshots/demo_app.png" alt="Demo application used to exercise several CSTI cases"></p>
 <p>The local demo application contains routes backed by different client-side template engines.</p>
 <p><img src="/posts/tools/csti-zap/screenshots/client_spider_results.png" alt="Client Spider results showing discovered client-side components"></p>
 <p>The Client Spider discovers browser-side components such as inputs and links, which the CSTI rule later uses as candidate injection surfaces.</p>
-<p><img src="./screenshots/engine_detection.png" alt="Engine detection alert showing the detected template engine and confidence evidence"></p>
+<p><img src="/posts/tools/csti-zap/screenshots/engine_detection.png" alt="Engine detection alert showing the detected template engine and confidence evidence"></p>
 <p>The engine detection alert reports the detected engine, the matched global object, and the heuristic evidence used to score confidence.</p>
 <p><img src="/posts/tools/csti-zap/screenshots/reflection_results.png" alt="Payload reflection results showing evaluated CSTI evidence"></p>
 <p>The reflection results show the payload probing phase, where the rule compares the baseline page with the attacked page and reports a match only when the expected evaluated result appears.</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>This has been a brief walkthrough of the work I&rsquo;ve done so far, looking forward for the review ZAP maintainer&rsquo;s so it can eventually be integrated into the ZAP codebase.</p>
+<p>This has been a brief walkthrough of the work I&rsquo;ve done so far. I am looking forward to the ZAP maintainers&rsquo; review so it can eventually be integrated into the ZAP codebase.</p>
 
   
   <hr>
@@ -520,14 +594,14 @@ A probe only matches if the attacked snapshot exceeds the baseline in visible te
       <div class="toc-toolbar" aria-label="Contents panel controls">
         <h4 id="contents"></h4>
         <div>
-          <button type="button" data-toc-side title="Move contents panel" aria-label="Move contents panel">&#8644;</button>
           <button type="button" data-toc-toggle title="Hide contents panel" aria-label="Hide contents panel">&minus;</button>
         </div>
       </div>
       <nav id="TableOfContents">
   <ul>
     <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#implementation-basis--the-csti-alert-paper">Implementation basis : The CSTI-Alert paper</a></li>
+    <li><a href="#implementation-basis-the-csti-alert-paper">Implementation Basis: The CSTI-Alert Paper</a></li>
+    <li><a href="#execution-workflow">Execution Workflow</a></li>
     <li><a href="#architecture">Architecture</a></li>
     <li><a href="#more-details-on-the-methodology">More details on the methodology</a></li>
     <li><a href="#engine-detection-and-confidence-scoring">Engine Detection and Confidence Scoring</a></li>
@@ -556,13 +630,9 @@ A probe only matches if the attacked snapshot exceeds the baseline in visible te
     var body = document.body;
     var toggle = document.querySelector("[data-toc-toggle]");
     var restore = document.querySelector("[data-toc-restore]");
-    var side = document.querySelector("[data-toc-side]");
 
     if (localStorage.getItem("post-toc-collapsed") === "true") {
       body.classList.add("toc-collapsed");
-    }
-    if (localStorage.getItem("post-toc-side") === "left") {
-      body.classList.add("toc-left");
     }
 
     function setCollapsed(value) {
@@ -578,12 +648,6 @@ A probe only matches if the attacked snapshot exceeds the baseline in visible te
     if (restore) {
       restore.addEventListener("click", function () {
         setCollapsed(false);
-      });
-    }
-    if (side) {
-      side.addEventListener("click", function () {
-        body.classList.toggle("toc-left");
-        localStorage.setItem("post-toc-side", body.classList.contains("toc-left") ? "left" : "right");
       });
     }
   });

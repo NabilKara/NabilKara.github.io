@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
@@ -104,13 +105,13 @@
 
 
 
-<meta name="generator" content="Hugo 0.163.0">
+<meta name="generator" content="Hugo 0.163.3">
 
 
     
     
 
-<link type="text/css" rel="stylesheet" href="/css/bundle.min.20df1a47a62670991e21d194f61c843c27664d145e016ff10b45793759fdd24f.css">
+<link type="text/css" rel="stylesheet" href="/css/bundle.min.1d64c8693c00ddcd4da23e0906058c905a593c5eda78bfffeeb42139b0204ee6.css">
 
 
     
@@ -319,7 +320,6 @@
       <div class="toc-toolbar" aria-label="Contents panel controls">
         <h4 id="contents"></h4>
         <div>
-          <button type="button" data-toc-side title="Move contents panel" aria-label="Move contents panel">&#8644;</button>
           <button type="button" data-toc-toggle title="Hide contents panel" aria-label="Hide contents panel">&minus;</button>
         </div>
       </div>
@@ -347,13 +347,9 @@
     var body = document.body;
     var toggle = document.querySelector("[data-toc-toggle]");
     var restore = document.querySelector("[data-toc-restore]");
-    var side = document.querySelector("[data-toc-side]");
 
     if (localStorage.getItem("post-toc-collapsed") === "true") {
       body.classList.add("toc-collapsed");
-    }
-    if (localStorage.getItem("post-toc-side") === "left") {
-      body.classList.add("toc-left");
     }
 
     function setCollapsed(value) {
@@ -369,12 +365,6 @@
     if (restore) {
       restore.addEventListener("click", function () {
         setCollapsed(false);
-      });
-    }
-    if (side) {
-      side.addEventListener("click", function () {
-        body.classList.toggle("toc-left");
-        localStorage.setItem("post-toc-side", body.classList.contains("toc-left") ? "left" : "right");
       });
     }
   });

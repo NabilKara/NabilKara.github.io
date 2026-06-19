@@ -26,62 +26,57 @@ Thanks to the rich and huge ZAP ecosystem (Client Spider add-on, Selenium integr
 
 ## Execution Workflow
 
-<div class="mermaid">
+{{< mermaid >}}
 flowchart TB
  subgraph P1["<b>1. SURFACE COLLECTION</b>"]
-    direction TB
-        B["Collect inputs and links"]
-        B1["Client Spider components<br>input, links"]
-        B2["HTML response fallback<br>textarea"]
+  direction TB
+    B["Collect inputs and links"]
+    B1["Client Spider components<br>input, links"]
+    B2["HTML response fallback<br>textarea"]
   end
  subgraph P2["<b>2. TEMPLATE ENGINE DETECTION</b>"]
-    direction TB
-        C["Open page in Selenium"]
-        C1["Wait for page settlement"]
-        C2["Check global variable presence<br>+ heuristics"]
-        C5["Assign confidence<br>LOW / HIGH / VERY_HIGH"]
+  direction TB
+    C["Open page in Selenium"]
+    C1["Wait for page settlement"]
+    C2["Check global variable presence<br>+ heuristics"]
+    C5["Assign confidence<br>LOW / HIGH / VERY_HIGH"]
   end
  subgraph P3["<b>3. PAYLOAD INJECTION</b>"]
-    direction TB
-        E["Select engine-specific payload"]
-        E1["Math payload example<br>{{11111*11111}} -&gt; 123454321"]
-        E2["Object payload example<br>{{this}} -&gt; [object Object]"]
-        F["Compare with baseline"]
-        G{"Count increased?"}
+  direction TB
+    E["Select engine-specific payload"]
+    E1["Math payload example<br>{{11111*11111}} -&gt; 123454321"]
+    E2["Object payload example<br>{{this}} -&gt; [object Object]"]
+    F["Compare with baseline"]
+    G{"Count increased?"}
   end
  subgraph P4["<b>4. DETECTION RESULT</b>"]
-    direction TB
-        J["Confirmed CSTI"]
-        J1["Raise HIGH risk ZAP alert"]
-        Z["No confirmed CSTI"]
+  direction TB
+    J["Confirmed CSTI"]
+    J1["Raise HIGH risk ZAP alert"]
+    Z["No confirmed CSTI"]
   end
-    B --> B1 & B2
-    C --> C1
-    C1 --> C2
-    C2 --> C5
-    E --> E1 & E2
-    E1 --> F
-    E2 --> F
-    F --> G
-    J --> J1
-    A["Target page"] --> P1
-    P1 --> P2
-    P2 --> P3
-    G -- Yes --> J
-    G -- No --> Z
+  B --> B1 & B2
+  C --> C1
+  C1 --> C2
+  C2 --> C5
+  E --> E1 & E2
+  E1 --> F
+  E2 --> F
+  F --> G
+  J --> J1
+  A["Target page"] --> P1
+  P1 --> P2
+  P2 --> P3
+  G -- Yes --> J
+  G -- No --> Z
 
-     G:::decision
-    classDef decision fill:#fff7ed,stroke:#ea580c,stroke-width:2px
-    style P1 fill:#eef6ff,stroke:#2563eb,stroke-width:3px,color:#1e3a8a
-    style P2 fill:#f0fdf4,stroke:#16a34a,stroke-width:3px,color:#14532d
-    style P3 fill:#fff7ed,stroke:#ea580c,stroke-width:3px,color:#7c2d12
-    style P4 fill:#fef2f2,stroke:#dc2626,stroke-width:3px,color:#7f1d1d
-</div>
-
-<script type="module">
-  import mermaid from '[https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs](https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs)';
-  mermaid.initialize({ startOnLoad: true });
-</script>
+   G:::decision
+  classDef decision fill:#fff7ed,stroke:#ea580c,stroke-width:2px
+  style P1 fill:#eef6ff,stroke:#2563eb,stroke-width:3px,color:#1e3a8a
+  style P2 fill:#f0fdf4,stroke:#16a34a,stroke-width:3px,color:#14532d
+  style P3 fill:#fff7ed,stroke:#ea580c,stroke-width:3px,color:#7c2d12
+  style P4 fill:#fef2f2,stroke:#dc2626,stroke-width:3px,color:#7f1d1d
+{{< /mermaid >}}
 
 
 
