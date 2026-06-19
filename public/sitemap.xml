@@ -2,72 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/posts/tools/csti-zap/</loc>
+    <loc>https://nabilkara.github.io/posts/tools/csti-zap/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/csti/</loc>
+    <loc>https://nabilkara.github.io/tags/csti/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/ctf/</loc>
+    <loc>https://nabilkara.github.io/posts/ctf/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/htb/</loc>
+    <loc>https://nabilkara.github.io/posts/htb/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/java/</loc>
+    <loc>https://nabilkara.github.io/tags/java/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://nabilkara.github.io/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://nabilkara.github.io/posts/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://nabilkara.github.io/tags/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/tools/</loc>
+    <loc>https://nabilkara.github.io/posts/tools/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/zap/</loc>
+    <loc>https://nabilkara.github.io/tags/zap/</loc>
     <lastmod>2026-06-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/cms/</loc>
+    <loc>https://nabilkara.github.io/tags/cms/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/htb/facts/</loc>
+    <loc>https://nabilkara.github.io/posts/htb/facts/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/linux/</loc>
+    <loc>https://nabilkara.github.io/tags/linux/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/privelege-escalation/</loc>
+    <loc>https://nabilkara.github.io/tags/privelege-escalation/</loc>
     <lastmod>2026-06-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/coppersmith/</loc>
+    <loc>https://nabilkara.github.io/tags/coppersmith/</loc>
     <lastmod>2025-09-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/cryptography/</loc>
+    <loc>https://nabilkara.github.io/tags/cryptography/</loc>
     <lastmod>2025-09-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/ctf/multi_rsa/</loc>
+    <loc>https://nabilkara.github.io/posts/ctf/multi_rsa/</loc>
     <lastmod>2025-09-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/rsa/</loc>
+    <loc>https://nabilkara.github.io/tags/rsa/</loc>
     <lastmod>2025-09-02T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/ctf/leaky_rsa/</loc>
+    <loc>https://nabilkara.github.io/posts/ctf/leaky_rsa/</loc>
     <lastmod>2025-08-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/sekaictf2025/</loc>
+    <loc>https://nabilkara.github.io/tags/sekaictf2025/</loc>
     <lastmod>2025-08-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/ctf/ssss/</loc>
+    <loc>https://nabilkara.github.io/posts/ctf/ssss/</loc>
     <lastmod>2025-08-18T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://nabilkara.github.io/about/</loc>
     <lastmod>2025-07-08T17:27:40+02:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/series/</loc>
+    <loc>https://nabilkara.github.io/series/</loc>
   </url>
 </urlset>

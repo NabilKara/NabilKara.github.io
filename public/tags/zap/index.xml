@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>ZAP on Nabil Kara — CTF Writeups</title>
-		<link>http://localhost:1313/tags/zap/</link>
+		<link>https://nabilkara.github.io/tags/zap/</link>
 		<description>Recent content in ZAP on Nabil Kara — CTF Writeups</description>
 		<generator>Hugo</generator>
 		<language>en-us</language>
@@ -12,12 +12,12 @@
 		
 			<lastBuildDate>Tue, 09 Jun 2026 00:00:00 +0000</lastBuildDate>
 		
-			<atom:link href="http://localhost:1313/tags/zap/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://nabilkara.github.io/tags/zap/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>A ZAP CSTI active scan rule</title>
-				<link>http://localhost:1313/posts/tools/csti-zap/</link>
+				<link>https://nabilkara.github.io/posts/tools/csti-zap/</link>
 				<pubDate>Tue, 09 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/posts/tools/csti-zap/</guid>
+				<guid>https://nabilkara.github.io/posts/tools/csti-zap/</guid>
 				<description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;I started to work on this project as an intern at Djezzy Optimum Télécom Algérie SPA, under the supervision of Mr. &lt;a href=&#34;https://www.linkedin.com/in/abdelkhalek-beraoud-707567245/&#34; target=&#34;_blank&#34;&gt;Beraoud Abdelkhalek&lt;/a&gt; who was behind the idea and whose invaluable guidance, transformative advice, and remarkable patience supported the work throughout its development.&lt;/p&gt;&#xA;&lt;p&gt;The active scan rule described here was built as an alpha rule for ZAP. You can find the code &lt;a href=&#34;https://github.com/NabilKara/zap-extensions&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;implementation-basis-the-csti-alert-paper&#34;&gt;Implementation Basis: The CSTI-Alert Paper&lt;/h2&gt;&#xA;&lt;p&gt;The methodology comes from the &lt;a href=&#34;https://www.eurecom.fr/en/publication/8608&#34; target=&#34;_blank&#34;&gt;paper&lt;/a&gt;: &lt;code&gt;{{alert(&#39;CSTI&#39;)}}: Large-Scale Detection of Client-Side Template Injection&lt;/code&gt;. The part we are concerned with for this active scan rule is not the large-scale crawling infrastructure itself, but the detection methodology:&lt;/p&gt;</description>
 			</item>
 	</channel>

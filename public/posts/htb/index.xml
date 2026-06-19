@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>HTB Writeups on Nabil Kara — CTF Writeups</title>
-		<link>http://localhost:1313/posts/htb/</link>
+		<link>https://nabilkara.github.io/posts/htb/</link>
 		<description>Recent content in HTB Writeups on Nabil Kara — CTF Writeups</description>
 		<generator>Hugo</generator>
 		<language>en-us</language>
@@ -12,13 +12,13 @@
 		
 			<lastBuildDate>Wed, 03 Jun 2026 00:00:00 +0000</lastBuildDate>
 		
-			<atom:link href="http://localhost:1313/posts/htb/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="https://nabilkara.github.io/posts/htb/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>Facts - Hack The Box machine</title>
-				<link>http://localhost:1313/posts/htb/facts/</link>
+				<link>https://nabilkara.github.io/posts/htb/facts/</link>
 				<pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>http://localhost:1313/posts/htb/facts/</guid>
-				<description>&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Difficulty: Easy&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;OS: Linux&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Author: LazyTitan333&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/posts/htb/facts/solved.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;An initial nmap scan reveals two open ports : &lt;code&gt;80&lt;/code&gt; (HTTP) and &lt;code&gt;23&lt;/code&gt; (SSH)&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/posts/htb/facts/pasted-image-20260602233327.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;We start by exploring the web page :&#xA;&lt;img src=&#34;http://localhost:1313/posts/htb/facts/pasted-image-20260602233347.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;If we click &lt;code&gt;Start Exploring&lt;/code&gt; we see a couple of facts , a search bar and a comments section. I browsed the facts and found nothing useful , except that the comments profiles are potential SSH usernames.&#xA;We opt for directory enumeration ,for instance, we can use ffuf :&lt;/p&gt;</description>
+				<guid>https://nabilkara.github.io/posts/htb/facts/</guid>
+				<description>&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Difficulty: Easy&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;OS: Linux&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Author: LazyTitan333&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://nabilkara.github.io/posts/htb/facts/solved.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;An initial nmap scan reveals two open ports : &lt;code&gt;80&lt;/code&gt; (HTTP) and &lt;code&gt;23&lt;/code&gt; (SSH)&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://nabilkara.github.io/posts/htb/facts/pasted-image-20260602233327.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;We start by exploring the web page :&#xA;&lt;img src=&#34;https://nabilkara.github.io/posts/htb/facts/pasted-image-20260602233347.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;If we click &lt;code&gt;Start Exploring&lt;/code&gt; we see a couple of facts , a search bar and a comments section. I browsed the facts and found nothing useful , except that the comments profiles are potential SSH usernames.&#xA;We opt for directory enumeration ,for instance, we can use ffuf :&lt;/p&gt;</description>
 			</item>
 	</channel>
 </rss>

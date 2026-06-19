@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
     
 
 
@@ -72,17 +72,17 @@
 <meta name="twitter:description" content="" />
 
 
-<base href="http://localhost:1313/posts/tools/csti-zap/" />
-<link rel="canonical" href="http://localhost:1313/posts/tools/csti-zap/" itemprop="url" />
-<meta name="url" content="http://localhost:1313/posts/tools/csti-zap/" />
-<meta name="twitter:url" content="http://localhost:1313/posts/tools/csti-zap/" />
-<meta property="og:url" content="http://localhost:1313/posts/tools/csti-zap/" />
+<base href="https://nabilkara.github.io/posts/tools/csti-zap/" />
+<link rel="canonical" href="https://nabilkara.github.io/posts/tools/csti-zap/" itemprop="url" />
+<meta name="url" content="https://nabilkara.github.io/posts/tools/csti-zap/" />
+<meta name="twitter:url" content="https://nabilkara.github.io/posts/tools/csti-zap/" />
+<meta property="og:url" content="https://nabilkara.github.io/posts/tools/csti-zap/" />
 
 
 <meta property="og:updated_time" content="2026-06-09T00:00:00Z" />
 
 
-<link rel="sitemap" type="application/xml" title="Sitemap" href='http://localhost:1313/sitemap.xml' />
+<link rel="sitemap" type="application/xml" title="Sitemap" href='https://nabilkara.github.io/sitemap.xml' />
 
 <meta name="robots" content="index,follow" />
 <meta name="googlebot" content="index,follow" />
@@ -178,7 +178,7 @@
                 <div class="post">
   <div class="info">
   <h1 class="post-title">
-    <a href="http://localhost:1313/posts/tools/csti-zap/">A ZAP CSTI active scan rule</a>
+    <a href="https://nabilkara.github.io/posts/tools/csti-zap/">A ZAP CSTI active scan rule</a>
   </h1>
 
   <div class="headline">
@@ -203,15 +203,15 @@
     <ul class="tags">
       
       <li class="tag-ZAP">
-        <a href="http://localhost:1313/tags/zap">ZAP</a>
+        <a href="https://nabilkara.github.io/tags/zap">ZAP</a>
       </li>
       
       <li class="tag-JAVA">
-        <a href="http://localhost:1313/tags/java">JAVA</a>
+        <a href="https://nabilkara.github.io/tags/java">JAVA</a>
       </li>
       
       <li class="tag-CSTI">
-        <a href="http://localhost:1313/tags/csti">CSTI</a>
+        <a href="https://nabilkara.github.io/tags/csti">CSTI</a>
       </li>
       
     </ul>
@@ -239,64 +239,49 @@
 </ol>
 <p>Thanks to the rich and huge ZAP ecosystem (Client Spider add-on, Selenium integration, Alerts model, &hellip;) I focused only on fitting CSTI-Alert&rsquo;s browser-driven proof into ZAP&rsquo;s environment.</p>
 <h2 id="execution-workflow">Execution Workflow</h2>
-
-
-<script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-
-    const lsTheme = localStorage.getItem("theme")
-    const hugoTheme = document.body.classList.contains("dark-theme") ? "dark" : null
-    const currTheme = lsTheme ? lsTheme : hugoTheme;
-    const mermaidTheme = currTheme == "light" ? "default" : "dark"
-
-    mermaid.initialize({startOnLoad: true, theme: mermaidTheme});
-</script>
-
-
-
 <div class="mermaid">
-flowchart TB
- subgraph P1["<b>1. SURFACE COLLECTION</b>"]
+  flowchart TB
+ subgraph P1[&#34;&lt;b&gt;1. SURFACE COLLECTION&lt;/b&gt;&#34;]
   direction TB
-    B["Collect inputs and links"]
-    B1["Client Spider components<br>input, links"]
-    B2["HTML response fallback<br>textarea"]
+    B[&#34;Collect inputs and links&#34;]
+    B1[&#34;Client Spider components&lt;br&gt;input, links&#34;]
+    B2[&#34;HTML response fallback&lt;br&gt;textarea&#34;]
   end
- subgraph P2["<b>2. TEMPLATE ENGINE DETECTION</b>"]
+ subgraph P2[&#34;&lt;b&gt;2. TEMPLATE ENGINE DETECTION&lt;/b&gt;&#34;]
   direction TB
-    C["Open page in Selenium"]
-    C1["Wait for page settlement"]
-    C2["Check global variable presence<br>+ heuristics"]
-    C5["Assign confidence<br>LOW / HIGH / VERY_HIGH"]
+    C[&#34;Open page in Selenium&#34;]
+    C1[&#34;Wait for page settlement&#34;]
+    C2[&#34;Check global variable presence&lt;br&gt;+ heuristics&#34;]
+    C5[&#34;Assign confidence&lt;br&gt;LOW / HIGH / VERY_HIGH&#34;]
   end
- subgraph P3["<b>3. PAYLOAD INJECTION</b>"]
+ subgraph P3[&#34;&lt;b&gt;3. PAYLOAD INJECTION&lt;/b&gt;&#34;]
   direction TB
-    E["Select engine-specific payload"]
-    E1["Math payload example<br>{{11111*11111}} -&gt; 123454321"]
-    E2["Object payload example<br>{{this}} -&gt; [object Object]"]
-    F["Compare with baseline"]
-    G{"Count increased?"}
+    E[&#34;Select engine-specific payload&#34;]
+    E1[&#34;Math payload example&lt;br&gt;{{11111*11111}} -&amp;gt; 123454321&#34;]
+    E2[&#34;Object payload example&lt;br&gt;{{this}} -&amp;gt; [object Object]&#34;]
+    F[&#34;Compare with baseline&#34;]
+    G{&#34;Count increased?&#34;}
   end
- subgraph P4["<b>4. DETECTION RESULT</b>"]
+ subgraph P4[&#34;&lt;b&gt;4. DETECTION RESULT&lt;/b&gt;&#34;]
   direction TB
-    J["Confirmed CSTI"]
-    J1["Raise HIGH risk ZAP alert"]
-    Z["No confirmed CSTI"]
+    J[&#34;Confirmed CSTI&#34;]
+    J1[&#34;Raise HIGH risk ZAP alert&#34;]
+    Z[&#34;No confirmed CSTI&#34;]
   end
-  B --> B1 & B2
-  C --> C1
-  C1 --> C2
-  C2 --> C5
-  E --> E1 & E2
-  E1 --> F
-  E2 --> F
-  F --> G
-  J --> J1
-  A["Target page"] --> P1
-  P1 --> P2
-  P2 --> P3
-  G -- Yes --> J
-  G -- No --> Z
+  B --&gt; B1 &amp; B2
+  C --&gt; C1
+  C1 --&gt; C2
+  C2 --&gt; C5
+  E --&gt; E1 &amp; E2
+  E1 --&gt; F
+  E2 --&gt; F
+  F --&gt; G
+  J --&gt; J1
+  A[&#34;Target page&#34;] --&gt; P1
+  P1 --&gt; P2
+  P2 --&gt; P3
+  G -- Yes --&gt; J
+  G -- No --&gt; Z
 
    G:::decision
   classDef decision fill:#fff7ed,stroke:#ea580c,stroke-width:2px
@@ -304,8 +289,8 @@ flowchart TB
   style P2 fill:#f0fdf4,stroke:#16a34a,stroke-width:3px,color:#14532d
   style P3 fill:#fff7ed,stroke:#ea580c,stroke-width:3px,color:#7c2d12
   style P4 fill:#fef2f2,stroke:#dc2626,stroke-width:3px,color:#7f1d1d
-
 </div>
+
 
 <h2 id="architecture">Architecture</h2>
 <p>The implementation is split into two classes:</p>
@@ -657,5 +642,11 @@ A probe only matches if the attacked snapshot exceeds the baseline in visible te
   
 
         </div>
+        
+        <script type="module">
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+        
     </body>
 </html>
