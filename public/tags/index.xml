@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Tags on Nabil Kara — CTF Writeups</title>
-		<link>https://nabilkara.github.io/tags/</link>
+		<link>http://localhost:1313/tags/</link>
 		<description>Recent content in Tags on Nabil Kara — CTF Writeups</description>
 		<generator>Hugo</generator>
 		<language>en-us</language>
@@ -12,75 +12,75 @@
 		
 			<lastBuildDate>Tue, 09 Jun 2026 00:00:00 +0000</lastBuildDate>
 		
-			<atom:link href="https://nabilkara.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
 			<item>
 				<title>CSTI</title>
-				<link>https://nabilkara.github.io/tags/csti/</link>
+				<link>http://localhost:1313/tags/csti/</link>
 				<pubDate>Tue, 09 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>https://nabilkara.github.io/tags/csti/</guid>
+				<guid>http://localhost:1313/tags/csti/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>JAVA</title>
-				<link>https://nabilkara.github.io/tags/java/</link>
+				<link>http://localhost:1313/tags/java/</link>
 				<pubDate>Tue, 09 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>https://nabilkara.github.io/tags/java/</guid>
+				<guid>http://localhost:1313/tags/java/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>ZAP</title>
-				<link>https://nabilkara.github.io/tags/zap/</link>
+				<link>http://localhost:1313/tags/zap/</link>
 				<pubDate>Tue, 09 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>https://nabilkara.github.io/tags/zap/</guid>
+				<guid>http://localhost:1313/tags/zap/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>CMS</title>
-				<link>https://nabilkara.github.io/tags/cms/</link>
+				<link>http://localhost:1313/tags/cms/</link>
 				<pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>https://nabilkara.github.io/tags/cms/</guid>
+				<guid>http://localhost:1313/tags/cms/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Linux</title>
-				<link>https://nabilkara.github.io/tags/linux/</link>
+				<link>http://localhost:1313/tags/linux/</link>
 				<pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>https://nabilkara.github.io/tags/linux/</guid>
+				<guid>http://localhost:1313/tags/linux/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Privelege Escalation</title>
-				<link>https://nabilkara.github.io/tags/privelege-escalation/</link>
+				<link>http://localhost:1313/tags/privelege-escalation/</link>
 				<pubDate>Wed, 03 Jun 2026 00:00:00 +0000</pubDate>
-				<guid>https://nabilkara.github.io/tags/privelege-escalation/</guid>
+				<guid>http://localhost:1313/tags/privelege-escalation/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Coppersmith</title>
-				<link>https://nabilkara.github.io/tags/coppersmith/</link>
+				<link>http://localhost:1313/tags/coppersmith/</link>
 				<pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
-				<guid>https://nabilkara.github.io/tags/coppersmith/</guid>
+				<guid>http://localhost:1313/tags/coppersmith/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Cryptography</title>
-				<link>https://nabilkara.github.io/tags/cryptography/</link>
+				<link>http://localhost:1313/tags/cryptography/</link>
 				<pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
-				<guid>https://nabilkara.github.io/tags/cryptography/</guid>
+				<guid>http://localhost:1313/tags/cryptography/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Rsa</title>
-				<link>https://nabilkara.github.io/tags/rsa/</link>
+				<link>http://localhost:1313/tags/rsa/</link>
 				<pubDate>Tue, 02 Sep 2025 00:00:00 +0000</pubDate>
-				<guid>https://nabilkara.github.io/tags/rsa/</guid>
+				<guid>http://localhost:1313/tags/rsa/</guid>
 				<description></description>
 			</item>
 			<item>
 				<title>Sekaictf2025</title>
-				<link>https://nabilkara.github.io/tags/sekaictf2025/</link>
+				<link>http://localhost:1313/tags/sekaictf2025/</link>
 				<pubDate>Mon, 18 Aug 2025 00:00:00 +0000</pubDate>
-				<guid>https://nabilkara.github.io/tags/sekaictf2025/</guid>
+				<guid>http://localhost:1313/tags/sekaictf2025/</guid>
 				<description></description>
 			</item>
 	</channel>
