@@ -3,7 +3,8 @@ title: "A ZAP CSTI active scan rule"
 date: 2026-06-09
 draft: false
 tags: ["ZAP", "JAVA", "CSTI"]
-cover: "images/cover_image.png"
+featuredImage: "/images/cover_image.png"
+image: "/images/cover_image.png"
 
 ---
 
