@@ -5,6 +5,8 @@ draft: false
 tags: ["ZAP", "JAVA", "CSTI"]
 featuredImage: "/images/cover_image.png"
 image: "/images/cover_image.png"
+imageWidth: 1376
+imageHeight: 768
 
 ---
 
